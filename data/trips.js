@@ -1,5 +1,15 @@
 const allTrips = [
   {
+    "id": 25,
+    "userID": 18,
+    "destinationID": 12,
+    "travelers": 6,
+    "date": "2019/10/26",
+    "duration": 9,
+    "status": "approved",
+    "suggestedActivities": []
+  },
+  {
     "id": 89,
     "userID": 2, 
     "destinationID": 10, 
@@ -57,16 +67,6 @@ const allTrips = [
     "date": "2020/01/29", 
     "duration": 8, 
     "status": "approved", 
-    "suggestedActivities": []
-  },
-  {
-    "id": 25,
-    "userID": 18,
-    "destinationID": 12,
-    "travelers": 6,
-    "date": "2019/10/26",
-    "duration": 9,
-    "status": "approved",
     "suggestedActivities": []
   }
 ];
