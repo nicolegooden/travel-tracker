@@ -24,13 +24,6 @@ const allDestinations = [
     "alt": "opera house and city buildings on the water with boats"
   }, 
   {
-    "id":10,
-    "destination":"Toronto, Canada",
-    "estimatedLodgingCostPerDay":90,
-    "estimatedFlightCostPerPerson":450,
-    "image":"https://images.unsplash.com/photo-1535776142635-8fa180c46af7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2756&q=80"
-  },
-  {
     "id":6,"destination":"Jakarta, Indonesia",
     "estimatedLodgingCostPerDay":70,
     "estimatedFlightCostPerPerson":890,
@@ -46,11 +39,11 @@ const allDestinations = [
     "alt":"city during the day time with eiffel tower"
   },
   {
-    "id":43,"destination":"Nassau, The Bahamas",
-    "estimatedLodgingCostPerDay":550,
-    "estimatedFlightCostPerPerson":90,
-    "image":"https://images.unsplash.com/photo-1548574505-5e239809ee19?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1664&q=80",
-    "alt":"aerial photography of white and blue cruise ships during daytime"
+    "id":10,
+    "destination":"Toronto, Canada",
+    "estimatedLodgingCostPerDay":90,
+    "estimatedFlightCostPerPerson":450,
+    "image":"https://images.unsplash.com/photo-1535776142635-8fa180c46af7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2756&q=80"
   },
   {
     "id":20,
@@ -59,6 +52,13 @@ const allDestinations = [
     "estimatedFlightCostPerPerson":275,
     "image":"https://images.unsplash.com/photo-1514214246283-d427a95c5d2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1573&q=80",
     "alt":"sand with palm trees and tall buildings in the background"
+  },
+  {
+    "id":43,"destination":"Nassau, The Bahamas",
+    "estimatedLodgingCostPerDay":550,
+    "estimatedFlightCostPerPerson":90,
+    "image":"https://images.unsplash.com/photo-1548574505-5e239809ee19?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1664&q=80",
+    "alt":"aerial photography of white and blue cruise ships during daytime"
   }
 ];
 
