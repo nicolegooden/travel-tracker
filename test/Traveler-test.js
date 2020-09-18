@@ -1,25 +1,10 @@
 import chai from 'chai';
 const expect = chai.expect;
-
+//const { expect } = require("chai");
+import allTravelers from '../data/travelers.js'
+import allTrips from '../data/trips.js'
+import allDestinations from '../data/destinations.js';
 import Traveler from '../src/Traveler.js';
-
-const allTravelers = [
-  {
-    "id": 1,
-    "name": "Ham Leadbeater",
-    "travelerType": "relaxer"
-  },
-  {
-    "id": 2,
-    "name": "Rachael Vaughten",
-    "travelerType": "thrill-seeker"
-  },
-  {
-    "id": 3,
-    "name": "Sibby Dawidowitsch",
-    "travelerType": "shopper"
-  }
-]
 
 describe('Traveler', () => {
   
@@ -56,10 +41,21 @@ describe('Traveler', () => {
     expect(traveler.travelerType).to.equal('relaxer');
   });
 
-  it('should keep track of all of its trips', () => {
-    expect(traveler.trips).to.deep.equal([]);
+  it('should have a record of its past trips', () => {
+    expect(traveler.pastTrips).to.deep.equal([]);
   });
-  //possibly need to test with real trips passed from the Trip Class later
+
+  it('should have a record of its present trips', () => {
+    expect(traveler.presentTrips).to.deep.equal([]);
+  });
+
+  it('should have a record of its upcoming trips', () => {
+    expect(traveler.upcomingTrips).to.deep.equal([]);
+  });
+
+  it('should have a record of its pending trips', () => {
+    expect(traveler.pendingTrips).to.deep.equal([])
+  });
 
 //   it('should have a unique username for login', () => {
 //     let username = 'traveler1';
@@ -69,5 +65,20 @@ describe('Traveler', () => {
   it('should have a unique password for login', () => {
     expect(traveler.password).to.equal('travel2020');
     //this is a default for all travelers - can be hard coded in constructor
+  });
+
+  it('should determine its unique username for login', () => {
+    expect(traveler.determineUsername()).to.equal('traveler1');
+  });
+
+  it('should be able to request a new trip', () => {
+    traveler.requestNewTrip(trip)
+    //what am I expecting here?
+    //new trip object should be returned
+  });
+
+  it('should be able to calculate the overall cost of a trip', () => {
+    let trip = allTrips[1];
+    expect(traveler.calculateTripCost(trip)).to.equal()
   });
 });
