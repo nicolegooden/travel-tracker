@@ -10,3 +10,5 @@ const allTravelers = [
     "travelerType": "thrill-seeker"
   }
 ];
+
+export default allTravelers;

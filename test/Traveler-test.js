@@ -129,7 +129,7 @@ describe('Traveler', () => {
           let totalLodgingCost = trip.duration * destination.estimatedLodgingCostPerDay;
           let totalFlightCost = trip.travelers * destination.estimatedFlightCostPerPerson;
           let combinedCost = totalLodgingCost + totalFlightCost;
-          acc += combinedCost;
+          acc += (combinedCost + (combinedCost * .10));
         })
         return acc;
       }, 0)
