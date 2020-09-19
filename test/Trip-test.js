@@ -12,6 +12,7 @@ describe('Trip', () => {
   let duration;
   let destination;
   let numberOfTravelers;
+  let travelerID;
   let trip;
 
   beforeEach(() => {
@@ -19,7 +20,8 @@ describe('Trip', () => {
     duration = 5;
     destination = 'Toronto, Canada';
     numberOfTravelers = 6;
-    trip = new Trip(date, duration, numberOfTravelers, destination);
+    travelerID = 2;
+    trip = new Trip(date, duration, numberOfTravelers, destination, travelerID);
   });
 
   it('should be a function', () => {
@@ -39,24 +41,24 @@ describe('Trip', () => {
   });
 
   it('should take a number of travelers', () => {
-    expect(trip.numberOfTravelers).to.equal(numberOfTravelers);
+    expect(trip.travelers).to.equal(numberOfTravelers);
   });
 
   it('should take a destination', () => {
     expect(trip.destination).to.equal(destination);
   });
 
-  it('should have a unique id', () => {
+  it('should be able to have a unique id', () => {
+    expect(trip.getID(allTrips)).to.equal(178)
     expect(trip.id).to.equal(178);
   });
 
   it('should have a userID', () => {
-    const travelerID = 2;
     expect(trip.userID).to.equal(travelerID);
   });
 
   it('should determine the destinationID of the destination', () => {
-    expect(trip.determineDestinationID(destination)).to.equal(10);
+    expect(trip.determineDestinationID(allDestinations)).to.equal(10);
     expect(trip.destinationID).to.equal(10);
   });
 
@@ -64,11 +66,15 @@ describe('Trip', () => {
     expect(trip.status).to.equal('pending');
   });
 
-  it('should update status from pending to approved', () => {
+  it.skip('should update status from pending to approved', () => {
     //not sure if I will need this test, this seems to be
     //a responsibility of the travel agent (not part of reqs)
     expect(trip.updateStatus()).to.equal('approved');
     expect(trip.status).to.equal('approved');
+  });
+
+  it('should be able to find the correct destination object', () => {
+    expect(trip.findDestinationInfo(allDestinations)).to.deep.equal(allDestinations[5]);
   });
 
   it('should be able to calculate its estimated cost', () => {
@@ -86,6 +92,6 @@ describe('Trip', () => {
       return ((tripCost * .10) + tripCost);
     };
 
-    expect(trip.estimateTripCost()).to.equal(estimateTripCost());
+    expect(trip.estimateTripCost(allDestinations)).to.equal(estimateTripCost());
   });
 });
