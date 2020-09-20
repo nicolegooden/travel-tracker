@@ -4,44 +4,61 @@ const expect = chai.expect;
 import allTravelers from '../data/travelers.js'
 import allTrips from '../data/trips.js'
 import allDestinations from '../data/destinations.js';
+import Trip from '../src/Trip.js';
 import Traveler from '../src/Traveler.js';
 
 describe('Traveler', () => {
   
   let traveler;
   let singleTraveler;
+  let time;
 
   beforeEach(() => {
     singleTraveler = allTravelers[1];
     traveler = new Traveler(singleTraveler);
+
+    time = {
+      daysFromDate(date, days) {
+        let millisecondsFromThen = days * 24 * 60 * 60 * 1000;
+        return new Date(date.getTime() + millisecondsFromThen)
+      },
+    
+      isBetween(beg, test, end) {
+        return beg.getTime() <= test.getTime() && test.getTime() <= end.getTime();
+      },
+
+      isBefore(test, reference) {
+        return test.getTime() < reference.getTime()
+      }
+    }    
   });
 
-  it.skip('should be a function', () => {
+  it('should be a function', () => {
     expect(Traveler).to.be.a('function');
   });
 
-  it.skip('should be an instance of Traveler', () => {
+  it('should be an instance of Traveler', () => {
     expect(traveler).to.be.an.instanceOf(Traveler);
   });
 
-  it.skip('should take a single traveler\'s data as an argument', () => {
+  it('should take a single traveler\'s data as an argument', () => {
     expect(singleTraveler).to.deep.equal(allTravelers[1]);
     expect(traveler.myData).to.deep.equal(singleTraveler);
   });
 
-  it.skip('should have a unique id', () => {
+  it('should have a unique id', () => {
     expect(traveler.id).to.equal(2);
   });
 
-  it.skip('should have a name', () => {
+  it('should have a name', () => {
     expect(traveler.name).to.equal('Rachael Vaughten');
   })
 
-  it.skip('should have a traveler type', () => {
+  it('should have a traveler type', () => {
     expect(traveler.travelerType).to.equal('thrill-seeker');
   });
 
-  it.skip('should be able to find all trips', () => {
+  it('should be able to find all trips', () => {
     const myTrips = [
       allTrips[1],
       allTrips[2],
@@ -52,14 +69,19 @@ describe('Traveler', () => {
     ];
 
     expect(traveler.myTrips).to.deep.equal([]);
-    expect(traveler.findAllTrips()).to.deep.equal(myTrips);
+    expect(traveler.findAllTrips(allTrips)).to.deep.equal(myTrips);
     expect(traveler.myTrips).to.deep.equal(myTrips);
     expect(traveler.myTrips).to.be.an('array').that.does.not.include(allTrips[0]);
   });
 
-  it.skip('should determine which trips are past trips', () => {
+  it('should determine which trips are past trips', () => {
     const pastTrips = [allTrips[0]];
-    expect(traveler.findPastTrips('2020/01/29')).to.deep.equal(pastTrips);
+    let theTrips = traveler.findAllTrips(allTrips);
+    let specificTrip = theTrips[5];
+    let tripWithDate = specificTrip.parseExistingDate();
+
+    console.log(tripWithDate)
+    expect(traveler.findPastTrips(tripWithDate, time)).to.deep.equal(pastTrips);
     expect(traveler.pastTrips).to.deep.equal(pastTrips);
   });
 
@@ -114,7 +136,7 @@ describe('Traveler', () => {
     //choose from destinations from API .. or add new destination?
   });
 
-  it('should be able to calculate the total cost of trips this year', () => {
+  it.skip('should be able to calculate the total cost of trips this year', () => {
     traveler.myTrips = [allTrips[5], allTrips[4], allTrips[3], allTrips[2], allTrips[6], allTrips[0]];
 
     const calculateCostsThisYear = (year) => {
