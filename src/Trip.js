@@ -1,11 +1,14 @@
 class Trip {
-  constructor(date, duration, travelers, destination, userID) {
-    this.date = date;
-    this.duration = duration;
-    this.travelers = travelers;
-    this.destination = destination;
-    this.userID = userID;
-    this.status = 'pending';
+  constructor(tripData, userID) {
+    this.duration = tripData.duration;
+    this.travelers = tripData.travelers;
+    this.destination = tripData.destination;
+    this.destinationID = tripData.destinationID;
+    this.userID = tripData.userID || userID;
+    this.status = tripData.status || 'pending';
+    let [year, month, day] = tripData.date.split('/');
+    this.date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+    this.id = tripData.id
   }
 
   getID(allTrips) {
@@ -25,10 +28,15 @@ class Trip {
   }
 
   findDestinationInfo(allDestinations) {
-    const correctDest = allDestinations.find(destination => {
-      return destination.destination === this.destination;
-    })
-    return correctDest;
+    if (!this.destinationID) {
+      return allDestinations.find(destination => {
+        return destination.destination === this.destination;
+      })
+    } else {
+      return allDestinations.find(destination => {
+        return destination.id === this.destinationID;
+      })
+    }
   }
 
   estimateTripCost(allDestinations) {
