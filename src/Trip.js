@@ -9,6 +9,7 @@ class Trip {
     let [year, month, day] = tripData.date.split('/');
     this.date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
     this.id = tripData.id
+    this.suggestedActivities = tripData.suggestedActivities;
   }
 
   getID(allTrips) {
