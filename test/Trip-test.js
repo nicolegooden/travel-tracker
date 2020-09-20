@@ -9,13 +9,13 @@ import Trip from '../src/Trip.js';
 describe('Trip', () => {
 
   let tripData;
-  let travelerID;
   let parsedDate;
   let trip;
 
   beforeEach(() => {
     tripData = { 
       "destinationID": 10, 
+      "userID": 2,
       "travelers": 6, 
       "date": "2020/12/25", 
       "duration": 5, 
@@ -24,8 +24,7 @@ describe('Trip', () => {
     };
     let [year, month, day] = tripData.date.split('/');
     parsedDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-    travelerID = 2;
-    trip = new Trip(tripData, travelerID);
+    trip = new Trip(tripData);
   });
 
   it('should be a function', () => {
@@ -58,7 +57,7 @@ describe('Trip', () => {
   });
 
   it('should have a userID', () => {
-    expect(trip.userID).to.equal(travelerID);
+    expect(trip.userID).to.equal(tripData.userID);
   });
 
   it('should determine the destinationID of the destination', () => {
