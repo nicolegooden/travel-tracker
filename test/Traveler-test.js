@@ -29,6 +29,10 @@ describe('Traveler', () => {
 
       isBefore(test, reference) {
         return test.getTime() < reference.getTime()
+      },
+
+      isEqual(test, reference) {
+        return test.getTime() === reference.getTime();
       }
     }    
   });
@@ -78,86 +82,64 @@ describe('Traveler', () => {
     const pastTrips = [allTrips[1]];
     let theTrips = traveler.findAllTrips(allTrips);
     traveler.convertTripDates(theTrips);
-    let dateOfTrip = theTrips[5].date;
-    //will I need to convert dates in general?
-    expect(traveler.findPastTrips(dateOfTrip, time)).to.deep.equal(pastTrips);
+    expect(traveler.findPastTrips('2020/01/29', time)).to.deep.equal(pastTrips);
     expect(traveler.pastTrips).to.deep.equal(pastTrips);
   });
 
   it('should determine which trip is happening currently', () => {
     const presentTrip = allTrips[6];
-    let theTrips = traveler.findAllTrips(allTrips);
-    let dateOfTrip = theTrips[5].date;
-    expect(traveler.findPresentTrip(dateOfTrip, time)).to.deep.equal(presentTrip);
+    traveler.findAllTrips(allTrips);
+    expect(traveler.findPresentTrip('2020/02/01', time)).to.deep.equal(presentTrip);
     expect(traveler.presentTrip).to.deep.equal(presentTrip);
   });
 
   it('should determine which trips are upcoming trips', () => {
-    const upcomingTrips = [allTrips[1], allTrips[2], allTrips[3]];
-    expect(traveler.findUpcomingTrips('2020/01/29')).to.deep.equal(upcomingTrips);
-    expect(traveler.upcomingTrips).to.deep.equal([upcomingTrips]);
+    const upcomingTrips = [allTrips[2], allTrips[3], allTrips[4], allTrips[5]];
+    traveler.findAllTrips(allTrips);
+    expect(traveler.findUpcomingTrips('2020/01/29', time)).to.deep.equal(upcomingTrips);
+    expect(traveler.upcomingTrips).to.deep.equal(upcomingTrips);
   });
 
-  it.skip('should determine which trips are pending trips', () => {
-    const pendingTrips = [allTrips[4]];
-    expect(traveler.findPendingTrips('2020/01/29')).to.deep.equal(pendingTrips);
+  it('should determine which trips are pending trips', () => {
+    const pendingTrips = [allTrips[5]];
+    traveler.findAllTrips(allTrips);
+    expect(traveler.findPendingTrips()).to.deep.equal(pendingTrips);
     expect(traveler.pendingTrips).to.deep.equal(pendingTrips);
   });
 
-  it.skip('should have a unique password for login', () => {
+  it('should have a unique password for login', () => {
     expect(traveler.password).to.equal('travel2020');
     //this is a default for all travelers - can be hard coded in constructor
   });
 
-  it.skip('should determine its unique username for login', () => {
-    expect(traveler.determineUsername()).to.equal('traveler1');
+  it('should determine its unique username for login', () => {
+    expect(traveler.determineUsername()).to.equal('traveler2');
+    expect(traveler.username).to.equal('traveler2')
   });
 
-  it.skip('should be able to request a new trip', () => {
-    const date = '2020/10/26';
+  it('should be able to request a new trip', () => {
+    let date = '2020/10/26';
+    // date = traveler.convertSingleDate(date);
     const duration = 4;
-    const numberOfTravelers = 2;
+    const travelers = 3;
     const destination = 'Stockholm, Sweden';
 
     const trip = {
       "id": 178, 
       "userID": 2, 
       "destinationID": 2, 
-      "travelers": 2, 
-      "date": "2020/10/26", 
+      "travelers": 3, 
+      "date": traveler.convertSingleDate(date), 
       "duration": 4, 
       "status": "pending", 
       "suggestedActivities": []
     }
-    expect(traveler.requestNewTrip(date, duration, numberOfTravelers, destination)).to.deep.equal(trip);
-    //new id for trip (check that trips.id does not exist in allTrips)
-    // ^ set id for added trip to the id of the last trip element plus 1 - always sequentially ordered
-    //and new userID === matches the user who made the request
-    //status always begins as 'pending'
-    //choose from destinations from API .. or add new destination?
+    expect(traveler.requestNewTrip(date, duration, travelers, destination, allDestinations, allTrips)).to.deep.equal(trip);
+    expect(traveler.requestNewTrip(date, duration, travelers, destination, allDestinations, allTrips)).to.be.an.instanceOf(Trip);
   });
 
-  it.skip('should be able to calculate the total cost of trips this year', () => {
-    traveler.myTrips = [allTrips[5], allTrips[4], allTrips[3], allTrips[2], allTrips[6], allTrips[0]];
-
-    const calculateCostsThisYear = (year) => {
-      let tripsThisYear = traveler.myTrips.filter(trip => {
-        return trip.date.includes(year);
-      })
-      return tripsThisYear.reduce((acc, trip) => {
-        let myDestinations = allDestinations.filter(destination => {
-          return destination.id === trip.destinationID;
-        })
-        myDestinations.forEach(destination => {
-          let totalLodgingCost = trip.duration * destination.estimatedLodgingCostPerDay;
-          let totalFlightCost = trip.travelers * destination.estimatedFlightCostPerPerson;
-          let combinedCost = totalLodgingCost + totalFlightCost;
-          acc += (combinedCost + (combinedCost * .10));
-        })
-        return acc;
-      }, 0)
-    };
-
-    expect(traveler.calculateCostsThisYear('2020')).to.equal(calculateCostsThisYear('2020'));
+  it('should be able to calculate the total cost of trips this year', () => {
+    traveler.myTrips = [allTrips[1], allTrips[2], allTrips[3], allTrips[4], allTrips[5], allTrips[6]];
+    expect(traveler.calculateCostsThisYear('2020', allDestinations)).to.equal(24550.9);
   });
 });
