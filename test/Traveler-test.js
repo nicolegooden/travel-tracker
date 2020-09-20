@@ -75,23 +75,24 @@ describe('Traveler', () => {
   });
 
   it('should determine which trips are past trips', () => {
-    const pastTrips = [allTrips[0]];
+    const pastTrips = [allTrips[1]];
     let theTrips = traveler.findAllTrips(allTrips);
-    let specificTrip = theTrips[5];
-    let tripWithDate = specificTrip.parseExistingDate();
-
-    console.log(tripWithDate)
-    expect(traveler.findPastTrips(tripWithDate, time)).to.deep.equal(pastTrips);
+    traveler.convertTripDates(theTrips);
+    let dateOfTrip = theTrips[5].date;
+    //will I need to convert dates in general?
+    expect(traveler.findPastTrips(dateOfTrip, time)).to.deep.equal(pastTrips);
     expect(traveler.pastTrips).to.deep.equal(pastTrips);
   });
 
-  it.skip('should determine which trips are present trips', () => {
-    const presentTrips = [allTrips[5]];
-    expect(traveler.findPresentTrips('2020/01/29')).to.deep.equal(presentTrips);
-    expect(traveler.presentTrips).to.deep.equal(presentTrips);
+  it('should determine which trip is happening currently', () => {
+    const presentTrip = allTrips[6];
+    let theTrips = traveler.findAllTrips(allTrips);
+    let dateOfTrip = theTrips[5].date;
+    expect(traveler.findPresentTrip(dateOfTrip, time)).to.deep.equal(presentTrip);
+    expect(traveler.presentTrip).to.deep.equal(presentTrip);
   });
 
-  it.skip('should determine which trips are upcoming trips', () => {
+  it('should determine which trips are upcoming trips', () => {
     const upcomingTrips = [allTrips[1], allTrips[2], allTrips[3]];
     expect(traveler.findUpcomingTrips('2020/01/29')).to.deep.equal(upcomingTrips);
     expect(traveler.upcomingTrips).to.deep.equal([upcomingTrips]);
