@@ -24,6 +24,13 @@ class Traveler {
     return myTrips;
   }
 
+  sortMyTrips(date, time) {
+    this.findPastTrips(date, time);
+    this.findPresentTrip(date, time);
+    this.findUpcomingTrips(date, time);
+    this.findPendingTrips();
+  }
+
   convertTripDates(allTrips) {
     let myTrips = this.findAllTrips(allTrips);
     myTrips.forEach(trip => {
@@ -34,14 +41,11 @@ class Traveler {
   }
 
   findPastTrips(date, time) {
-    let tripStart;
-    let tripDuration;
-    let tripEnd;
     date = this.convertSingleDate(date);
     this.myTrips.forEach(trip => {
-      tripStart = trip.date;
-      tripDuration = trip.duration;
-      tripEnd = time.daysFromDate(tripStart, tripDuration);
+      let tripStart = trip.date;
+      let tripDuration = trip.duration;
+      let tripEnd = time.daysFromDate(tripStart, tripDuration);
       if (!time.isBetween(tripStart, date, tripEnd) && time.isBefore(trip.date, date)) {
         this.pastTrips.push(trip)
       }
@@ -51,14 +55,11 @@ class Traveler {
 
   findPresentTrip(date, time) {
     let presentTrip;
-    let tripStart;
-    let tripDuration;
-    let tripEnd;
     date = this.convertSingleDate(date);
     this.myTrips.forEach(trip => {
-      tripStart = trip.date;
-      tripDuration = trip.duration;
-      tripEnd = time.daysFromDate(tripStart, tripDuration);
+      let tripStart = trip.date;
+      let tripDuration = trip.duration;
+      let tripEnd = time.daysFromDate(tripStart, tripDuration);
       if (time.isBetween(tripStart, date, tripEnd)) {
         presentTrip = trip;
       }
@@ -117,7 +118,7 @@ class Traveler {
     requestedTrip.determineDestinationID(allDestinations);
     requestedTrip.getID(allTrips);
     delete requestedTrip.destination;
-    // this.myTrips.push(requestedTrip);
+    this.myTrips.push(requestedTrip);
     return requestedTrip;
   }
 
