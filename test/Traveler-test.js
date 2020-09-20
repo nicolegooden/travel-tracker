@@ -1,6 +1,7 @@
 import chai from 'chai';
 const expect = chai.expect;
 //const { expect } = require("chai");
+import time from '../src/time.js';
 import allTravelers from '../data/travelers.js'
 import allTrips from '../data/trips.js'
 import allDestinations from '../data/destinations.js';
@@ -11,30 +12,10 @@ describe('Traveler', () => {
   
   let traveler;
   let singleTraveler;
-  let time;
 
   beforeEach(() => {
     singleTraveler = allTravelers[1];
-    traveler = new Traveler(singleTraveler);
-
-    time = {
-      daysFromDate(date, days) {
-        let millisecondsFromThen = days * 24 * 60 * 60 * 1000;
-        return new Date(date.getTime() + millisecondsFromThen)
-      },
-    
-      isBetween(beg, test, end) {
-        return beg.getTime() <= test.getTime() && test.getTime() <= end.getTime();
-      },
-
-      isBefore(test, reference) {
-        return test.getTime() < reference.getTime()
-      },
-
-      isEqual(test, reference) {
-        return test.getTime() === reference.getTime();
-      }
-    }    
+    traveler = new Traveler(singleTraveler);   
   });
 
   it('should be a function', () => {
