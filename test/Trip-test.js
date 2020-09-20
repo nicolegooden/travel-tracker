@@ -25,7 +25,7 @@ describe('Trip', () => {
     let [year, month, day] = tripData.date.split('/');
     parsedDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
     travelerID = 2;
-    trip = new Trip(travelerID, tripData);
+    trip = new Trip(tripData, travelerID);
   });
 
   it('should be a function', () => {
