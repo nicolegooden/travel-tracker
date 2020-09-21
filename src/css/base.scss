@@ -36,6 +36,8 @@ main {
 
 .username-section {
   @include flex-center();
+  padding-bottom: 1rem;
+  padding-top: 1rem;
 }
 
 .username-indicator {
@@ -52,6 +54,10 @@ main {
 
 .hidden {
   display: none;
+}
+
+.hidden-important {
+  display: none !important;
 }
 
 .dashboard-display {
@@ -94,7 +100,7 @@ main {
  width: 100%;
  display: grid;
  grid-template-columns: repeat(2, 1fr);
- grid-template-rows: repeat(2, 1fr);
+ grid-template-rows: 2fr 2fr 0.5fr;
  text-align: center;
 }
 
@@ -164,7 +170,6 @@ main {
   .book-trip-button {
     margin-top: 5rem;
     margin-left: auto;
-    // position: absolute;
     bottom: 0px;
   }
 
