@@ -1,15 +1,19 @@
 class Trip {
-  constructor(tripData, userID) {
+  constructor(tripData, myDestinationData) {
     this.duration = tripData.duration;
     this.travelers = tripData.travelers;
-    this.destination = tripData.destination;
-    this.destinationID = tripData.destinationID;
-    this.userID = tripData.userID || userID;
+    this.myDestinationData = myDestinationData;
+    this.destinationID = myDestinationData.id;
+    this.userID = tripData.userID;
     this.status = tripData.status || 'pending';
-    let [year, month, day] = tripData.date.split('/');
-    this.date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-    this.id = tripData.id
+    this.id = tripData.id;
     this.suggestedActivities = tripData.suggestedActivities;
+    if (tripData.date instanceof Date) {
+      this.date = tripData.date;
+    } else {
+      let [year, month, day] = tripData.date.split('/');
+      this.date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day))
+    }
   }
 
   getID(allTrips) {
@@ -22,28 +26,10 @@ class Trip {
     this.id = tripIDList[0].id + 1
     return this.id;
   }
-
-  determineDestinationID(allDestinations) {
-    this.destinationID = this.findDestinationInfo(allDestinations).id;
-    return this.destinationID;
-  }
-
-  findDestinationInfo(allDestinations) {
-    if (!this.destinationID) {
-      return allDestinations.find(destination => {
-        return destination.destination === this.destination;
-      })
-    } else {
-      return allDestinations.find(destination => {
-        return destination.id === this.destinationID;
-      })
-    }
-  }
-
-  estimateTripCost(allDestinations) {
-    let destinationInfo = this.findDestinationInfo(allDestinations);
-    let totalLodgingCost = this.duration * destinationInfo.estimatedLodgingCostPerDay;
-    let totalFlightCost = this.travelers * destinationInfo.estimatedFlightCostPerPerson;
+  
+  estimateTripCost() {
+    let totalLodgingCost = this.duration * this.myDestinationData.estimatedLodgingCostPerDay;
+    let totalFlightCost = this.travelers * this.myDestinationData.estimatedFlightCostPerPerson;
     let tripCost = totalLodgingCost + totalFlightCost;
     return ((tripCost * .10) + tripCost);
   }

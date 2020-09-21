@@ -14,34 +14,35 @@ class Traveler {
     this.password = 'travel2020';
   }
 
-  findAllTrips(allTrips) {
+  findAllTrips(allTrips, allDestinations) {
     const myTrips = allTrips.filter(trip => {
       return trip.userID === this.id;
     });
+    let myDestinationData;
     myTrips.forEach(trip => {
-      this.myTrips.push(trip)
+      allDestinations.forEach(destination => {
+        if (trip.destinationID === destination.id) {
+          myDestinationData = destination;
+          this.myTrips.push(new Trip(trip, myDestinationData));
+        }
+      })
     })
-    return myTrips;
+    return this.myTrips;
   }
 
-  convertTripDates(allTrips) {
-    let myTrips = this.findAllTrips(allTrips);
-    myTrips.forEach(trip => {
-      let [year, month, day] = trip.date.split('/');
-      trip.date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-      this.myTrips = myTrips;
-    })
+  sortMyTrips(date, time) {
+    this.findPastTrips(date, time);
+    this.findPresentTrip(date, time);
+    this.findUpcomingTrips(date, time);
+    this.findPendingTrips();
   }
 
   findPastTrips(date, time) {
-    let tripStart;
-    let tripDuration;
-    let tripEnd;
     date = this.convertSingleDate(date);
     this.myTrips.forEach(trip => {
-      tripStart = trip.date;
-      tripDuration = trip.duration;
-      tripEnd = time.daysFromDate(tripStart, tripDuration);
+      let tripStart = trip.date;
+      let tripDuration = trip.duration;
+      let tripEnd = time.daysFromDate(tripStart, tripDuration);
       if (!time.isBetween(tripStart, date, tripEnd) && time.isBefore(trip.date, date)) {
         this.pastTrips.push(trip)
       }
@@ -51,14 +52,11 @@ class Traveler {
 
   findPresentTrip(date, time) {
     let presentTrip;
-    let tripStart;
-    let tripDuration;
-    let tripEnd;
     date = this.convertSingleDate(date);
     this.myTrips.forEach(trip => {
-      tripStart = trip.date;
-      tripDuration = trip.duration;
-      tripEnd = time.daysFromDate(tripStart, tripDuration);
+      let tripStart = trip.date;
+      let tripDuration = trip.duration;
+      let tripEnd = time.daysFromDate(tripStart, tripDuration);
       if (time.isBetween(tripStart, date, tripEnd)) {
         presentTrip = trip;
       }
@@ -103,42 +101,33 @@ class Traveler {
     return this.username;
   }
 
-  requestNewTrip(date, duration, travelers, destination, allDestinations, allTrips) {
-    let tripData = {
-      userID: this.id,
-      travelers,
-      date,
-      duration,
-      destination,
-      status: 'pending',
-      suggestedActivities: []
-    }
-    let requestedTrip = new Trip(tripData);
-    requestedTrip.determineDestinationID(allDestinations);
-    requestedTrip.getID(allTrips);
-    delete requestedTrip.destination;
-    // this.myTrips.push(requestedTrip);
-    return requestedTrip;
-  }
-
-  calculateCostsThisYear(year, allDestinations) {
+  calculateCostsThisYear(year) {
     let tripsThisYear = this.myTrips.filter(trip => {
       return trip.date.getUTCFullYear() === parseInt(year);
     })
-    return tripsThisYear.reduce((acc, trip) => {
-      let myDestinations = allDestinations.filter(destination => {
-        return destination.id === trip.destinationID;
-      })
-      myDestinations.forEach(destination => {
-        let totalLodgingCost = trip.duration * destination.estimatedLodgingCostPerDay;
-        let totalFlightCost = trip.travelers * destination.estimatedFlightCostPerPerson;
-        let combinedCost = totalLodgingCost + totalFlightCost;
-        let combinedCostWithFee = combinedCost + (combinedCost * .10);
-        acc += combinedCostWithFee;
-      })
-      return acc;
+    return tripsThisYear.reduce((yearCost, trip) => {
+      yearCost += trip.estimateTripCost();
+      return yearCost;
     }, 0)      
   }
 }
 
 export default Traveler;
+
+  // requestNewTrip(date, duration, travelers, destination, allDestinations, allTrips) {
+  //   let tripData = {
+  //     userID: this.id,
+  //     travelers,
+  //     date,
+  //     duration,
+  //     destination,
+  //     status: 'pending',
+  //     suggestedActivities: []
+  //   }
+  //   let requestedTrip = new Trip(tripData, myDestinationData);
+  //   requestedTrip.determineDestinationID(allDestinations);
+  //   requestedTrip.getID(allTrips);
+  //   delete requestedTrip.destination;
+  //   this.myTrips.push(requestedTrip);
+  //   return requestedTrip;
+  // }
