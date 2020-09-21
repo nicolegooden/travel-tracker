@@ -26,23 +26,6 @@ class Trip {
     this.id = tripIDList[0].id + 1
     return this.id;
   }
-
-  determineDestinationID(allDestinations) {
-    this.destinationID = this.findDestinationInfo(allDestinations).id;
-    return this.destinationID;
-  }
-
-  // findDestinationInfo(allDestinations) {
-  //   if (!this.destinationID) {
-  //     return allDestinations.find(destination => {
-  //       return destination.destination === this.destination;
-  //     })
-  //   } else {
-  //     return allDestinations.find(destination => {
-  //       return destination.id === this.destinationID;
-  //     })
-  //   }
-  // }
   
   estimateTripCost() {
     let totalLodgingCost = this.duration * this.myDestinationData.estimatedLodgingCostPerDay;
