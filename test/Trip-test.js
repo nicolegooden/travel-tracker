@@ -69,8 +69,7 @@ describe('Trip', () => {
     expect(trip.userID).to.equal(tripData.userID);
   });
 
-  it('should determine the destinationID of the destination', () => {
-    expect(trip.determineDestinationID(allDestinations)).to.equal(10);
+  it('should have its destination id', () => {
     expect(trip.destinationID).to.equal(10);
   });
 
@@ -85,10 +84,6 @@ describe('Trip', () => {
     expect(trip.status).to.equal('approved');
   });
 
-  it('should be able to find the correct destination object', () => {
-    expect(trip.findDestinationInfo(allDestinations)).to.deep.equal(allDestinations[5]);
-  });
-
   it('should be able to calculate its estimated cost', () => {
     let estimatedLodgingCostPerDay = 90;
     let estimatedFlightCostPerPerson = 450;
@@ -100,6 +95,6 @@ describe('Trip', () => {
       return ((tripCost * .10) + tripCost);
     };
 
-    expect(trip.estimateTripCost(allDestinations)).to.equal(estimateTripCost());
+    expect(trip.estimateTripCost()).to.equal(estimateTripCost());
   });
 });
