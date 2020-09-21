@@ -4,18 +4,32 @@
     <title>Travel Tracker</title>
   </head>
   <body>
-    <header>
+    <header class='header'>
       <h1>Travel Tracker</h1>
+      <h2 class='welcome-name'>Welcome, </h2>
     </header>
     <main class='main'>
-      <h2 class='log-in-here'>Log in Here</h2>
-      <section class='username-section'>
-        <h3 class='username-indicator'>Username: </h3>
-        <input class='username-input' type="text">
+      <section class='log-in-display hidden'>
+        <!-- hidden class added when working on dashboard -->
+        <h2 class='log-in-here'>Login Here</h2>
+        <section class='username-section'>
+          <h3 class='username-indicator'>Username: </h3>
+          <input class='username-input' type="text">
+        </section>
+        <section class='password-section'>
+          <h3 class='password-indicator'>Password: </h3>
+          <input class='password-input' type="text">
+        </section>
       </section>
-      <section class='password-section'>
-        <h3 class='password-indicator'>Password: </h3>
-        <input class='password-input' type="text">
+      <section class='dashboard-display'>
+          <h2 class='plan-my-trip-text dashboard'>Plan My Trip</h2>
+          <article class='plan-box dashboard'>
+            <h2 class='date indicator'>Date: </h2>
+          </article>
+          <h2 class='trip-history dashboard'>Trip History</h2>
+          <article class='history-box dashboard'>
+            
+          </article>
       </section>
     </main>
 
