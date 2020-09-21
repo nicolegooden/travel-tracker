@@ -9,25 +9,30 @@
       <h2 class='welcome-name'>Welcome, </h2>
     </header>
     <main class='main'>
-      <section class='log-in-display hidden'>
-        <!-- hidden class added when working on dashboard -->
+      <section class='log-in-display'>
         <h2 class='log-in-here'>Login Here</h2>
         <section class='username-section'>
-          <h3 class='username-indicator'>Username: </h3>
-          <input class='username-input' type='text'>
+          <!-- <h3 class='username-indicator'>Username: </h3> -->
+          <label for='username' class='username-indicator'>
+            Please type your username: 
+            <input class='username-input' type='text'>
+          </label>
         </section>
         <section class='password-section'>
-          <h3 class='password-indicator'>Password: </h3>
-          <input class='password-input' type='text'>
+          <!-- <h3 class='password-indicator'>Password: </h3> -->
+          <label for='password' class='password-indicator'>
+            Please type your password:
+            <input class='password-input' type='text'>
+          </label>
         </section>
       </section>
-      <section class='dashboard-display'>
+      <section class='dashboard-display hidden-important'>
           <h2 class='plan-my-trip-text dashboard'>Plan My Trip</h2>
-          <section class='plan-box dashboard'>
+          <section class='plan-box'>
             <article class='date-article'>
               <h2 class='date indicator'>Trip Start: </h2>
               <label for='date' class='hidden'>
-                When should your trip start?
+                When should my trip start?
                 <input class='date-input' type='date' value='YYYY/MM/DD'>
               </label>
             </article>
@@ -61,7 +66,7 @@
             </article>
           </section>
           <h2 class='trip-history dashboard'>Trip History</h2>
-          <section class='history-box dashboard'>
+          <section class='history-box'>
             <article class='present-trip-article'>
               <h2 class='present-trip-text'>Present Trip</h2>
               <h3 class='present-trip-data'></h3>
@@ -77,6 +82,10 @@
             <article class='pending-trips-article'>
               <h2 class='pending-trips-text'>Pending Trips</h2>
               <h3 class='pending-trips-data'></h3>
+            </article>
+            <article class='cost-this-year'>
+              <h2 class='year-indicator'>This Year:</h2>
+              <h2 class='year-cost'>$</h2>
             </article>
           </section>
       </section>
