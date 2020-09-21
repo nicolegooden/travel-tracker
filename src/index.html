@@ -25,17 +25,24 @@
           <h2 class='plan-my-trip-text dashboard'>Plan My Trip</h2>
           <section class='plan-box dashboard'>
             <article class='date-article'>
-              <h2 class='date indicator'>Date: </h2>
-              <input class='date-input' type='date' value='YYYY/MM/DD'>
+              <h2 class='date indicator'>Trip Start: </h2>
+              <label for='date' class='hidden'>
+                When should your trip start?
+                <input class='date-input' type='date' value='YYYY/MM/DD'>
+              </label>
             </article>
             <article class='duration-article'>
               <h2 class='duration-indicator'>Duration: </h2>
-              <input class='duration-input' value='1' min='1' type='number'>
+              <label for='duration'>
+                <input class='duration-input' value='1' min='1' type='number'>
+              </label>
               <h3 class='days-text'> in days</h3>
             </article>
             <article class='travelers-article'>
               <h2 class='travelers-indicator'>Travelers: </h2>
-              <input class='duration-input' value='1' min='1' type='number'>
+              <label for='number-of-travelers'>
+                <input class='travelers-input' value='1' min='1' type='number'>
+              </label>
             </article>
             <article class='destination-article'>
               <h2 class='destination-indicator'>Choose Destination: </h2>
