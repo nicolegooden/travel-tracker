@@ -73,14 +73,7 @@ describe('Trip', () => {
     expect(trip.destinationID).to.equal(10);
   });
 
-  it.skip('should have a pending status by default, if new trip', () => {
-    expect(trip.status).to.equal('pending');
-  });
-
-  it.skip('should update status from pending to approved', () => {
-    //not sure if I will need this test, this seems to be
-    //a responsibility of the travel agent (not part of reqs)
-    expect(trip.updateStatus()).to.equal('approved');
+  it('should have a status', () => {
     expect(trip.status).to.equal('approved');
   });
 
