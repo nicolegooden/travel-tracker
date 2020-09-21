@@ -137,7 +137,7 @@ describe('Traveler', () => {
   });
 
   it('should be able to calculate the total cost of trips this year', () => {
-    traveler.myTrips = [allTrips[1], allTrips[2], allTrips[3], allTrips[4], allTrips[5], allTrips[6]];
+    traveler.findAllTrips(allTrips, allDestinations);
     expect(traveler.calculateCostsThisYear('2020', allDestinations)).to.equal(24550.9);
   });
 });
