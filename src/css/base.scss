@@ -7,11 +7,27 @@ $primary-background: #40B0A6;
   justify-content: center;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   background: $primary-background;
+  height: 100%;
 }
 
 main {
+  height: 100%;
+}
+
+.header {
+  background-color: #F5F5DC;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid;
+}
+
+.log-in-here {
   text-align: center;
 }
 
@@ -31,8 +47,55 @@ main {
   margin-right: 1rem;
 }
 
+.hidden {
+  display: none;
+}
+
+.dashboard-display {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 5fr;
+  place-items: center;
+  grid-gap: 5%;
+}
+
+.plan-and-history {
+  display: flex;
+  justify-content: space-around;
+}
+
+.plan-my-trip-text {
+  grid-column-start: 1;
+}
+
+.trip-history {
+  grid-column-start: 2;
+}
+
+.plan-box {
+ grid-row-start: 2;
+ grid-column-start: 1;
+ background-color:#F5F5DC;
+ height: 100%;
+ width: 100%;
+}
+
+.history-box {
+ grid-row-start: 2;
+ grid-column-start: 2;
+ background-color: #F5F5DC;
+ height: 100%;
+ width: 100%;
+}
+
 @media screen and (max-width: 600px) {
   .log-in-here {
     padding-top: 5rem;
+  }
+
+  .dashboard-display {
+    height: 100%;
+    display: block;
   }
 }
