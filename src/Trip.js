@@ -32,22 +32,21 @@ class Trip {
     return this.destinationID;
   }
 
-  findDestinationInfo(allDestinations) {
-    if (!this.destinationID) {
-      return allDestinations.find(destination => {
-        return destination.destination === this.destination;
-      })
-    } else {
-      return allDestinations.find(destination => {
-        return destination.id === this.destinationID;
-      })
-    }
-  }
+  // findDestinationInfo(allDestinations) {
+  //   if (!this.destinationID) {
+  //     return allDestinations.find(destination => {
+  //       return destination.destination === this.destination;
+  //     })
+  //   } else {
+  //     return allDestinations.find(destination => {
+  //       return destination.id === this.destinationID;
+  //     })
+  //   }
+  // }
   
-  estimateTripCost(allDestinations) {
-    let destinationInfo = this.findDestinationInfo(allDestinations);
-    let totalLodgingCost = this.duration * destinationInfo.estimatedLodgingCostPerDay;
-    let totalFlightCost = this.travelers * destinationInfo.estimatedFlightCostPerPerson;
+  estimateTripCost() {
+    let totalLodgingCost = this.duration * this.myDestinationData.estimatedLodgingCostPerDay;
+    let totalFlightCost = this.travelers * this.myDestinationData.estimatedFlightCostPerPerson;
     let tripCost = totalLodgingCost + totalFlightCost;
     return ((tripCost * .10) + tripCost);
   }
