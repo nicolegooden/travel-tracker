@@ -95,11 +95,7 @@ describe('Trip', () => {
 
     const estimateTripCost = () => {
       let totalLodgingCost = tripData.duration * estimatedLodgingCostPerDay;
-      //duration = trip.duration
-      //trip.destination.estimatedLodgingCostPerDay
       let totalFlightCost = tripData.travelers * estimatedFlightCostPerPerson;
-      //numberOfTravelers = trip.travelers
-      //trip.destination.estimatedFlightCostPerPerson
       let tripCost = totalLodgingCost + totalFlightCost;
       return ((tripCost * .10) + tripCost);
     };
