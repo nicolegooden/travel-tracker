@@ -92,6 +92,10 @@ main {
  background-color: #F5F5DC;
  height: 85%;
  width: 100%;
+ display: grid;
+ grid-template-columns: repeat(2, 1fr);
+ grid-template-rows: repeat(2, 1fr);
+ text-align: center;
 }
 
 .date-article {
@@ -150,7 +154,7 @@ main {
   }
 
   .history-box {
-    height: 85%;
+    height: 65%;
   }
 
   .plan-box {
