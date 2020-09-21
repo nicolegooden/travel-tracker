@@ -1,7 +1,38 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-;
+$primary-background: #40B0A6;
+
+@mixin flex-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 body {
   background: $primary-background;
+}
+
+main {
+  text-align: center;
+}
+
+.username-section {
+  @include flex-center();
+}
+
+.username-indicator {
+  margin-right: 1rem;
+}
+
+.password-section {
+  @include flex-center();
+}
+
+.password-indicator {
+  margin-right: 1rem;
+}
+
+@media screen and (max-width: 600px) {
+  .log-in-here {
+    padding-top: 5rem;
+  }
 }
