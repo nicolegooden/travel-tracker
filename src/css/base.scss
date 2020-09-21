@@ -1,7 +1,180 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-;
+
+@import 'normalize';
+
+$primary-background: #40B0A6;
+
+@mixin flex-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+html {
+  height: 100%;
+}
 
 body {
   background: $primary-background;
+  height: 100%;
+}
+
+main {
+  height: 100%;
+}
+
+.header {
+  background-color: #F5F5DC;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid;
+}
+
+.log-in-here {
+  text-align: center;
+}
+
+.username-section {
+  @include flex-center();
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+.username-indicator {
+  margin-right: 1rem;
+}
+
+.password-section {
+  @include flex-center();
+}
+
+.password-indicator {
+  margin-right: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.hidden-important {
+  display: none !important;
+}
+
+.dashboard-display {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 5fr;
+  place-items: center;
+  grid-gap: 5%;
+}
+
+.plan-and-history {
+  display: flex;
+  justify-content: space-around;
+}
+
+.plan-my-trip-text {
+  margin-top: 5rem;
+  grid-column-start: 1;
+}
+
+.trip-history {
+  margin-top: 5rem;
+  grid-column-start: 2;
+}
+
+.plan-box {
+ grid-row-start: 2;
+ grid-column-start: 1;
+ background-color:#F5F5DC;
+ height: 85%;
+ width: 100%;
+}
+
+.history-box {
+ grid-row-start: 2;
+ grid-column-start: 2;
+ background-color: #F5F5DC;
+ height: 85%;
+ width: 100%;
+ display: grid;
+ grid-template-columns: repeat(2, 1fr);
+ grid-template-rows: 2fr 2fr 0.5fr;
+ text-align: center;
+}
+
+.date-article {
+  @include flex-center();
+}
+
+.date-indicator {
+  margin-right: 1rem;
+}
+
+.duration-article {
+  @include flex-center();
+}
+
+.travelers-article {
+  @include flex-center();
+}
+
+.destination-article {
+  text-align: center;
+}
+
+.cost-article {
+  @include flex-center();
+}
+
+.book-trip-button {
+  margin-top: 5rem;
+  margin-left: auto;
+}
+
+.submit-trip-request {
+  display: flex;
+}
+
+@media screen and (max-width: 630px) {
+  .log-in-here {
+    padding-top: 5rem;
+  }
+
+  .dashboard-display {
+    height: 100%;
+    display: block;
+  }
+
+  .plan-my-trip-text {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .trip-history {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .history-box {
+    height: 65%;
+  }
+
+  .plan-box {
+    height: 65%;
+  }
+
+  .book-trip-button {
+    margin-top: 5rem;
+    margin-left: auto;
+    bottom: 0px;
+  }
+
+  .submit-trip-request {
+    position: absolute;
+    width: 100%;
+  }
 }

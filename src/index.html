@@ -1,12 +1,95 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>Webpack Starter Kit</title>
+    <title>Travel Tracker</title>
   </head>
   <body>
-    <h1>Webpack Starter Kit</h1>
-
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
+    <header class='header'>
+      <h1>Travel Tracker</h1>
+      <h2 class='welcome-name'>Welcome, </h2>
+    </header>
+    <main class='main'>
+      <section class='log-in-display'>
+        <h2 class='log-in-here'>Login Here</h2>
+        <section class='username-section'>
+          <!-- <h3 class='username-indicator'>Username: </h3> -->
+          <label for='username' class='username-indicator'>
+            Please type your username: 
+            <input class='username-input' type='text'>
+          </label>
+        </section>
+        <section class='password-section'>
+          <!-- <h3 class='password-indicator'>Password: </h3> -->
+          <label for='password' class='password-indicator'>
+            Please type your password:
+            <input class='password-input' type='text'>
+          </label>
+        </section>
+      </section>
+      <section class='dashboard-display hidden-important'>
+          <h2 class='plan-my-trip-text dashboard'>Plan My Trip</h2>
+          <section class='plan-box'>
+            <article class='date-article'>
+              <h2 class='date indicator'>Trip Start: </h2>
+              <label for='date' class='hidden'>
+                When should my trip start?
+                <input class='date-input' type='date' value='YYYY/MM/DD'>
+              </label>
+            </article>
+            <article class='duration-article'>
+              <h2 class='duration-indicator'>Duration: </h2>
+              <label for='duration'>
+                <input class='duration-input' value='1' min='1' type='number'>
+              </label>
+              <h3 class='days-text'> in days</h3>
+            </article>
+            <article class='travelers-article'>
+              <h2 class='travelers-indicator'>Travelers: </h2>
+              <label for='number-of-travelers'>
+                <input class='travelers-input' value='1' min='1' type='number'>
+              </label>
+            </article>
+            <article class='destination-article'>
+              <h2 class='destination-indicator'>Choose Destination: </h2>
+              <label for="destinations">Select Destination</label>
+              <select name='destinations' id='destinations'>
+                <!-- <option value='id'>Hawaii</option>
+                <option value='id'>Sweden</option>
+                <option value='id'>Denver</option> -->
+              </select>
+            </article>
+            <article class='cost-article'>
+              <h2 class='cost-indicator'>Estimated Cost:</h2>
+            </article>
+            <article class='submit-trip-request'>
+              <button class='book-trip-button'>Book Trip!</button>
+            </article>
+          </section>
+          <h2 class='trip-history dashboard'>Trip History</h2>
+          <section class='history-box'>
+            <article class='present-trip-article'>
+              <h2 class='present-trip-text'>Present Trip</h2>
+              <h3 class='present-trip-data'></h3>
+            </article>
+            <article class='past-trips-article'>
+              <h2 class='past-trips-text'>Past Trips</h2>
+              <h3 class='past-trips-data'></h3>
+            </article>
+            <article class='upcoming-trips-article'>
+              <h2 class='upcoming-trips-text'>Upcoming Trips</h2>
+              <h3 class='upcoming-trips-data'></h3>
+            </article>
+            <article class='pending-trips-article'>
+              <h2 class='pending-trips-text'>Pending Trips</h2>
+              <h3 class='pending-trips-data'></h3>
+            </article>
+            <article class='cost-this-year'>
+              <h2 class='year-indicator'>This Year:</h2>
+              <h2 class='year-cost'>$</h2>
+            </article>
+          </section>
+      </section>
+    </main>
 
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
