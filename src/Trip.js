@@ -1,15 +1,19 @@
 class Trip {
-  constructor(tripData) {
+  constructor(tripData, myDestinationData) {
     this.duration = tripData.duration;
     this.travelers = tripData.travelers;
-    this.destination = tripData.destination;
-    this.destinationID = tripData.destinationID;
-    this.userID = tripData.userID || userID;
+    this.myDestinationData = myDestinationData;
+    this.destinationID = myDestinationData.id;
+    this.userID = tripData.userID;
     this.status = tripData.status || 'pending';
-    let [year, month, day] = tripData.date.split('/');
-    this.date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-    this.id = tripData.id
+    this.id = tripData.id;
     this.suggestedActivities = tripData.suggestedActivities;
+    if (tripData.date instanceof Date) {
+      this.date = tripData.date;
+    } else {
+      let [year, month, day] = tripData.date.split('/');
+      this.date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day))
+    }
   }
 
   getID(allTrips) {
@@ -39,7 +43,7 @@ class Trip {
       })
     }
   }
-
+  
   estimateTripCost(allDestinations) {
     let destinationInfo = this.findDestinationInfo(allDestinations);
     let totalLodgingCost = this.duration * destinationInfo.estimatedLodgingCostPerDay;
