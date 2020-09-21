@@ -101,6 +101,19 @@ class Traveler {
     return this.username;
   }
 
+  calculateCostsThisYear(year) {
+    let tripsThisYear = this.myTrips.filter(trip => {
+      return trip.date.getUTCFullYear() === parseInt(year);
+    })
+    return tripsThisYear.reduce((yearCost, trip) => {
+      yearCost += trip.estimateTripCost();
+      return yearCost;
+    }, 0)      
+  }
+}
+
+export default Traveler;
+
   // requestNewTrip(date, duration, travelers, destination, allDestinations, allTrips) {
   //   let tripData = {
   //     userID: this.id,
@@ -118,16 +131,3 @@ class Traveler {
   //   this.myTrips.push(requestedTrip);
   //   return requestedTrip;
   // }
-
-  calculateCostsThisYear(year) {
-    let tripsThisYear = this.myTrips.filter(trip => {
-      return trip.date.getUTCFullYear() === parseInt(year);
-    })
-    return tripsThisYear.reduce((yearCost, trip) => {
-      yearCost += trip.estimateTripCost();
-      return yearCost;
-    }, 0)      
-  }
-}
-
-export default Traveler;
