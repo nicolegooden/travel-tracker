@@ -1,7 +1,6 @@
 import chai from 'chai';
 const expect = chai.expect;
 //const { expect } = require("chai");
-import allTravelers from '../data/travelers.js'
 import allTrips from '../data/trips.js'
 import allDestinations from '../data/destinations.js';
 import Trip from '../src/Trip.js';
@@ -10,6 +9,7 @@ describe('Trip', () => {
 
   let tripData;
   let parsedDate;
+  let myDestinationData;
   let trip;
 
   beforeEach(() => {
@@ -22,9 +22,18 @@ describe('Trip', () => {
       "status": "approved", 
       "suggestedActivities": []
     };
+
+    myDestinationData = {
+      "id":10,
+      "destination":"Toronto, Canada",
+      "estimatedLodgingCostPerDay":90,
+      "estimatedFlightCostPerPerson":450,
+      "image":"https://images.unsplash.com/photo-1535776142635-8fa180c46af7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2756&q=80"
+    }
+
     let [year, month, day] = tripData.date.split('/');
     parsedDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-    trip = new Trip(tripData);
+    trip = new Trip(tripData, myDestinationData);
   });
 
   it('should be a function', () => {
@@ -39,16 +48,16 @@ describe('Trip', () => {
     expect(trip.date).to.deep.equal(parsedDate);
   });
 
-  it('should take a duration', () => {
+  it('should have a duration', () => {
     expect(trip.duration).to.equal(tripData.duration);
   });
 
-  it('should take a number of travelers', () => {
+  it('should have a number of travelers', () => {
     expect(trip.travelers).to.equal(tripData.travelers);
   });
 
-  it('should take a destination', () => {
-    expect(trip.destination).to.equal(tripData.destination);
+  it('should have its destination data', () => {
+    expect(trip.myDestinationData).to.equal(myDestinationData);
   });
 
   it('should be able to have a unique id', () => {
