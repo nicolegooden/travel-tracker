@@ -119,22 +119,13 @@ class Traveler {
   //   return requestedTrip;
   // }
 
-  calculateCostsThisYear(year, allDestinations) {
+  calculateCostsThisYear(year) {
     let tripsThisYear = this.myTrips.filter(trip => {
       return trip.date.getUTCFullYear() === parseInt(year);
     })
-    return tripsThisYear.reduce((acc, trip) => {
-      let myDestinations = allDestinations.filter(destination => {
-        return destination.id === trip.destinationID;
-      })
-      myDestinations.forEach(destination => {
-        let totalLodgingCost = trip.duration * destination.estimatedLodgingCostPerDay;
-        let totalFlightCost = trip.travelers * destination.estimatedFlightCostPerPerson;
-        let combinedCost = totalLodgingCost + totalFlightCost;
-        let combinedCostWithFee = combinedCost + (combinedCost * .10);
-        acc += combinedCostWithFee;
-      })
-      return acc;
+    return tripsThisYear.reduce((yearCost, trip) => {
+      yearCost += trip.estimateTripCost();
+      return yearCost;
     }, 0)      
   }
 }
