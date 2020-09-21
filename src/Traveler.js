@@ -14,14 +14,20 @@ class Traveler {
     this.password = 'travel2020';
   }
 
-  findAllTrips(allTrips) {
+  findAllTrips(allTrips, allDestinations) {
     const myTrips = allTrips.filter(trip => {
       return trip.userID === this.id;
     });
+    let myDestinationData;
     myTrips.forEach(trip => {
-      this.myTrips.push(trip)
+      allDestinations.forEach(destination => {
+        if (trip.destinationID === destination.id) {
+          myDestinationData = destination;
+          this.myTrips.push(new Trip(trip, myDestinationData));
+        }
+      })
     })
-    return myTrips;
+    return this.myTrips;
   }
 
   sortMyTrips(date, time) {
@@ -29,15 +35,6 @@ class Traveler {
     this.findPresentTrip(date, time);
     this.findUpcomingTrips(date, time);
     this.findPendingTrips();
-  }
-
-  convertTripDates(allTrips) {
-    let myTrips = this.findAllTrips(allTrips);
-    myTrips.forEach(trip => {
-      let [year, month, day] = trip.date.split('/');
-      trip.date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-      this.myTrips = myTrips;
-    })
   }
 
   findPastTrips(date, time) {
@@ -104,23 +101,23 @@ class Traveler {
     return this.username;
   }
 
-  requestNewTrip(date, duration, travelers, destination, allDestinations, allTrips) {
-    let tripData = {
-      userID: this.id,
-      travelers,
-      date,
-      duration,
-      destination,
-      status: 'pending',
-      suggestedActivities: []
-    }
-    let requestedTrip = new Trip(tripData);
-    requestedTrip.determineDestinationID(allDestinations);
-    requestedTrip.getID(allTrips);
-    delete requestedTrip.destination;
-    this.myTrips.push(requestedTrip);
-    return requestedTrip;
-  }
+  // requestNewTrip(date, duration, travelers, destination, allDestinations, allTrips) {
+  //   let tripData = {
+  //     userID: this.id,
+  //     travelers,
+  //     date,
+  //     duration,
+  //     destination,
+  //     status: 'pending',
+  //     suggestedActivities: []
+  //   }
+  //   let requestedTrip = new Trip(tripData, myDestinationData);
+  //   requestedTrip.determineDestinationID(allDestinations);
+  //   requestedTrip.getID(allTrips);
+  //   delete requestedTrip.destination;
+  //   this.myTrips.push(requestedTrip);
+  //   return requestedTrip;
+  // }
 
   calculateCostsThisYear(year, allDestinations) {
     let tripsThisYear = this.myTrips.filter(trip => {
