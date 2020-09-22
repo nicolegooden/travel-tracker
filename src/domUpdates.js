@@ -10,6 +10,31 @@ let pendingTrips = document.querySelector('.pending-trips-data');
 let yearCost = document.querySelector('.year-cost');
 let destinationSelections = document.querySelector('.destination-selections');
 let costIndicator = document.querySelector('.cost-indicator');
+let popupSection = document.querySelector('.popup-section');
+let x = document.querySelector('.close-popup');
+let historyBox = document.querySelector('.history-box');
+
+// historyBox.addEventListener('click', () => {
+//   let closestHistorySection = event.target.closest('.data');
+//   closestHistorySection
+// })
+
+
+// presentTrip.addEventListener('click', () => {
+
+// })
+
+// pastTrips.addEventListener('click', () => {
+
+// })
+
+// pendingTrips.addEventListener('click', () => {
+
+// })
+
+// upcomingTrips.addEventListener('click', () => {
+
+// })
 
 let domUpdates = {
   goToMyDashboard() {
@@ -23,19 +48,19 @@ let domUpdates = {
 
   showTripHistory(currentTraveler) {
     if (currentTraveler.presentTrip !== undefined) {
-      presentTrip.innerText = `${currentTraveler.presentTrip}`;
+      presentTrip.innerHTML = `<h4>${currentTraveler.presentTrip}</h4>`;
    //what if the traveler has more than one presentTrip?
     } else {
-      presentTrip.innerText = 'You\'re home, bummer!';
+      presentTrip.innerHTML = `<h4>You're home, bummer!</h4`;
     }
     currentTraveler.pastTrips.forEach(pastTrip => {
-      pastTrips.innerText += `${pastTrip.myDestinationData.destination} \n `;
+      pastTrips.innerHTML += `<h4>${pastTrip.myDestinationData.destination}<br></h4>`;
     })
     currentTraveler.upcomingTrips.forEach(upcomTrip => {
-      upcomingTrips.innerText += `${upcomTrip.myDestinationData.destination} \n `;
+      upcomingTrips.innerHTML += `<h4>${upcomTrip.myDestinationData.destination}<br></h4>`;
     })
     currentTraveler.pendingTrips.forEach(pendingTrip => {
-      pendingTrips.innerText += `${pendingTrip.myDestinationData.destination} \n`;
+      pendingTrips.innerHTML += `<h4>${pendingTrip.myDestinationData.destination}<br></h4>`;
     })
   },
 
@@ -59,6 +84,21 @@ let domUpdates = {
 
   showPotentialTripCost(estimatedCost) {
     costIndicator.innerText = `Estimated Cost: $ ${estimatedCost}`
+  },
+
+  openTripPopup() {
+    popupSection.classList.remove('hidden');
+  }, 
+
+  closeTripPopup() {
+    popupSection.classList.add('hidden');
+    //this is to be called when the x is clicked on the popup
+    //maybe x variable needs to exist in scripts instead
+  },
+
+  getTripDetails() {
+    //when openTripPopup() is fired
+
   }
 }
 
