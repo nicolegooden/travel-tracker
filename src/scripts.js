@@ -19,13 +19,12 @@ window.addEventListener('load', () =>{
 })
 
 loginButton.addEventListener('click', () => {
-    attemptLogin()
+  attemptLogin()
 });
 
 function attemptLogin() {
   if (usernameInput.value !== ' ' && passwordInput.value !== ' ') {
     checkValidityOfUsername();
-    checkValidityOfPassword();
   } else {
     alert('Please type in your username and password.');
   }
@@ -43,7 +42,7 @@ function checkValidityOfUsername() {
   possibleTravelers.forEach(traveler => {
     if (usernameInput.value === ('traveler' + traveler.id)) {
       currentTraveler = traveler;
-      domUpdates.goToMyDashboard();
+      checkValidityOfPassword();
     }
   })
 }
@@ -52,6 +51,8 @@ function checkValidityOfPassword() {
   if (passwordInput.value !== 'travel2020') {
     alert(`This password is invalid.  Please try again.`);
     resetLoginInputs();
+  } else {
+    domUpdates.goToMyDashboard();
   }
 }
 
