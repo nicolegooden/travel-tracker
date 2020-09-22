@@ -14,6 +14,8 @@ let popupSection = document.querySelector('.popup-section');
 let x = document.querySelector('.close-popup');
 let popupMain = document.querySelector('.popup-main');
 
+// x.addEventListener('click', closeTripPopup)
+
 let domUpdates = {
   goToMyDashboard() {
     loginDisplay.classList.add('hidden-important');
@@ -82,15 +84,17 @@ let domUpdates = {
 
   openTripPopup(trip) {
     popupSection.classList.remove('hidden');
+    //change innerText to innerHTML
+    //add it wherever inside innerHTML
     popupMain.innerText = `ID: ${trip.id}\n 
        UserID: ${trip.userID}\n 
        DestinationID: ${trip.destinationID}\n  
-       Number of Travlers: ${trip.travelers}\n 
+       Number of Travelers: ${trip.travelers}\n 
        Start Date: ${trip.date}\n 
-       Duration: ${trip.duration}\n 
+       Duration: ${trip.duration} days\n 
       Status: ${trip.status}\n 
-      Lodging Per Day: ${trip.myDestinationData.estimatedLodgingCostPerDay}\n
-      Flight Per Person: ${trip.myDestinationData.estimatedFlightCostPerPerson}`;
+      Lodging Per Day: $ ${trip.myDestinationData.estimatedLodgingCostPerDay}\n
+      Flight Per Person: $ ${trip.myDestinationData.estimatedFlightCostPerPerson}`;
   }, 
 
   closeTripPopup() {
