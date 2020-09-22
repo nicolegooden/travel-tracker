@@ -34,7 +34,6 @@ let apiCalls = {
   accessAllData() {
     return Promise.all([apiCalls.getAllTravelers(), apiCalls.getAllTrips(), apiCalls.getAllDestinations()])
       .then(values => {
-        console.log(values)
         return values;
       })
       .catch(err => {
