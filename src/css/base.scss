@@ -137,6 +137,19 @@ main {
   display: flex;
 }
 
+.submit-login-criteria {
+  text-align: center;
+}
+
+.login-button {
+  margin-top: 2rem;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #D9EAEA
+  }
+}
+
 @media screen and (max-width: 630px) {
   .log-in-here {
     padding-top: 5rem;
