@@ -2,6 +2,7 @@ import domUpdates from './domUpdates.js';
 import apiCalls from './apiCalls.js';
 import Traveler from './Traveler.js';
 import time from './time.js';
+import Trip from './Trip.js';
 
 const loginButton = document.querySelector('.login-button');
 let usernameInput = document.querySelector('.username-input');
@@ -17,7 +18,6 @@ let allTravelers;
 let allTrips;
 let allDestinations;
 let currentTraveler;
-let trip;
 
 window.addEventListener('load', () =>{
   apiCalls.accessAllData().then(data => {
@@ -29,12 +29,8 @@ window.addEventListener('load', () =>{
 
 loginButton.addEventListener('click', () => {
   attemptLogin()
-});
+})
 
-// dateInput.addEventListener('change', gatherNewTrip)
-// durationInput.addEventListener('change', gatherNewTrip)
-// travelersInput.addEventListener('change', gatherNewTrip)
-// destinationSelections.addEventListener('change', gatherNewTrip)
 dateInput.addEventListener('change', formatDateInput);
 bookTripButton.addEventListener('click', gatherNewTrip);
 
@@ -51,7 +47,7 @@ function gatherNewTrip() {
     status: 'pending',
     suggestedActivities: []
   }
-  return trip;
+  apiCalls.postNewTrip(trip, currentTraveler, allDestinations);
 }
 
 function getID(allTrips) {
@@ -61,7 +57,6 @@ function getID(allTrips) {
   tripIDList.sort((a, b) => {
     return b.id - a.id;
   })
-  console.log(tripIDList[0].id + 1)
   return tripIDList[0].id + 1;
 }
 
@@ -156,6 +151,3 @@ function getCostsThisYear() {
   domUpdates.showCostsThisYear(moneyThisYear)
 }
 
-function createNewTrip() {
-
-}
