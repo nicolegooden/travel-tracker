@@ -1,6 +1,7 @@
 import domUpdates from './domUpdates.js';
 import apiCalls from './apiCalls.js';
 import Traveler from './Traveler.js';
+import time from './time.js';
 
 const loginButton = document.querySelector('.login-button');
 let usernameInput = document.querySelector('.username-input');
@@ -23,6 +24,11 @@ window.addEventListener('load', () =>{
 loginButton.addEventListener('click', () => {
   attemptLogin()
 });
+
+function getToday() {
+  let today = new Date();
+  return today;
+}
 
 function attemptLogin() {
   if (usernameInput.value !== ' ' && passwordInput.value !== ' ') {
@@ -56,6 +62,7 @@ function checkValidityOfPassword() {
   } else {
     domUpdates.goToMyDashboard();
     createTraveler()
+    determineTravelerTrips();
   }
 }
 
@@ -70,6 +77,7 @@ function createTraveler() {
   }
 }
 
-// function determineTravelerTrips() {
-//   currentTraveler
-// }
+function determineTravelerTrips() {
+  currentTraveler.findAllTrips(allTrips, allDestinations);
+  currentTraveler.sortMyTrips(getToday(), time);
+}
