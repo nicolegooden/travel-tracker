@@ -16,6 +16,7 @@ let bookTripButton = document.querySelector('.book-trip-button');
 let showCostButton = document.querySelector('.show-cost-button');
 let historyBox = document.querySelector('.history-box');
 let popupSection = document.querySelector('.popup-section');
+let logoutButton = document.querySelector('.logout-button');
 
 let allTravelers;
 let allTrips;
@@ -44,13 +45,17 @@ historyBox.addEventListener('click', (event) => {
   })
 })
 
-loginButton.addEventListener('click', () => {
-  attemptLogin()
-})
-
+logoutButton.addEventListener('click', logOut)
+loginButton.addEventListener('click', attemptLogin)
 dateInput.addEventListener('change', formatDateInput);
 bookTripButton.addEventListener('click', submitTripRequest);
 showCostButton.addEventListener('click', estimateTripCostByInputs);
+
+function logOut() {
+  domUpdates.goBackToLogin();
+  logoutButton.classList.add('hidden');
+  resetLoginInputs();
+}
 
 function gatherNewTrip() {
   let duration = parseInt(durationInput.value);
