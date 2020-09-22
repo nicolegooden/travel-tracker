@@ -15,7 +15,6 @@ let destinationSelections = document.querySelector('.destination-selections');
 let bookTripButton = document.querySelector('.book-trip-button');
 let showCostButton = document.querySelector('.show-cost-button');
 let historyBox = document.querySelector('.history-box');
-let x = document.querySelector('.close-popup');
 let popupSection = document.querySelector('.popup-section');
 
 let allTravelers;
@@ -72,6 +71,7 @@ function submitTripRequest() {
   let trip = gatherNewTrip();
   apiCalls.postNewTrip(trip, currentTraveler, allDestinations);
   getCostsThisYear();
+  alert('Success! Your trip has been booked.  To view trip details, click on your last trip destination under Pending Trips.');
 }
 
 function estimateTripCostByInputs() {
