@@ -12,11 +12,19 @@ let destinationSelections = document.querySelector('.destination-selections');
 let costIndicator = document.querySelector('.cost-indicator');
 let popupSection = document.querySelector('.popup-section');
 let popupMain = document.querySelector('.popup-main');
+let logoutButton = document.querySelector('.logout-button');
 
 let domUpdates = {
   goToMyDashboard() {
     loginDisplay.classList.add('hidden-important');
     dashboardDisplay.classList.remove('hidden-important');
+    logoutButton.classList.remove('hidden');
+  },
+
+  goBackToLogin() {
+    dashboardDisplay.classList.add('hidden-important');
+    loginDisplay.classList.remove('hidden-important');
+    welcomeText.innerText = '';
   },
 
   welcomeTravelerByName(firstName) {
