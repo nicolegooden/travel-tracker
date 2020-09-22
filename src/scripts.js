@@ -13,6 +13,7 @@ let durationInput = document.querySelector('.duration-input');
 let travelersInput = document.querySelector('.travelers-input');
 let destinationSelections = document.querySelector('.destination-selections');
 let bookTripButton = document.querySelector('.book-trip-button');
+let showCostButton = document.querySelector('.show-cost-button');
 
 let allTravelers;
 let allTrips;
@@ -32,12 +33,13 @@ loginButton.addEventListener('click', () => {
 })
 
 dateInput.addEventListener('change', formatDateInput);
-bookTripButton.addEventListener('click', gatherNewTrip);
+bookTripButton.addEventListener('click', submitTripRequest);
+showCostButton.addEventListener('click', estimateTripCostByInputs);
 
 function gatherNewTrip() {
   let duration = parseInt(durationInput.value);
   let travelers = parseInt(travelersInput.value);
-  let trip = {
+  return {
     id: getID(allTrips),
     userID: currentTraveler.id,
     destinationID: getDestinationInfo(),
@@ -47,7 +49,21 @@ function gatherNewTrip() {
     status: 'pending',
     suggestedActivities: []
   }
+}
+
+function submitTripRequest() {
+  let trip = gatherNewTrip();
   apiCalls.postNewTrip(trip, currentTraveler, allDestinations);
+  getCostsThisYear();
+}
+
+function estimateTripCostByInputs() {
+  let trip = gatherNewTrip();
+  let myDestinationInfo = allDestinations.find(destination => {
+    return destination.id === trip.destinationID;
+  })
+  let potentialTrip = new Trip (trip, myDestinationInfo);
+  domUpdates.showPotentialTripCost(potentialTrip.estimateTripCost());
 }
 
 function getID(allTrips) {
@@ -150,4 +166,3 @@ function getCostsThisYear() {
   let moneyThisYear = currentTraveler.calculateCostsThisYear(getYearForToday());
   domUpdates.showCostsThisYear(moneyThisYear)
 }
-
