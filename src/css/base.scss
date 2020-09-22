@@ -161,8 +161,9 @@ main {
 
 .popup-main {
   position: fixed;
-  width: 800px;
-  height: 400px;
+  text-align: center;
+  width: 70%;
+  height: 70%;
   border: 2px solid black;
   border-radius: 5px;
   background-color: white;
@@ -177,7 +178,6 @@ main {
   width: 25px;
   height: 25px;
   border-radius: 25px;
-  // border: 2px solid black;
   text-align: center;
   right: 5px;
   top: 5px;
@@ -190,7 +190,7 @@ main {
   font-weight: bold;
 }
 
-@media screen and (max-width: 630px) {
+@media screen and (max-width: 650px) {
   .log-in-here {
     padding-top: 5rem;
   }
@@ -229,5 +229,13 @@ main {
   .submit-trip-request {
     position: absolute;
     width: 100%;
+  }
+
+  .popup-section {
+    overflow-wrap: break-word;
+  }
+
+  .popup-main {
+    left: 95%;
   }
 }
