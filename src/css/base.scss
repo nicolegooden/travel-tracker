@@ -146,7 +146,7 @@ main {
 
   &:hover {
     cursor: pointer;
-    background-color: #D9EAEA
+    background-color: #D9EAEA;
   }
 }
 
@@ -188,6 +188,11 @@ main {
   margin-top: 0;
   font-family: sans-serif;
   font-weight: bold;
+}
+
+.click-for-popup:hover {
+  cursor: pointer;
+  color: blue;
 }
 
 @media screen and (max-width: 650px) {
