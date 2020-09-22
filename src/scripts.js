@@ -65,6 +65,7 @@ function checkValidityOfPassword() {
     domUpdates.welcomeTravelerByName();
     determineTravelerTrips();
     getFirstName();
+    domUpdates.showTripHistory(currentTraveler);
   }
 }
 
@@ -82,10 +83,10 @@ function createTraveler() {
 function determineTravelerTrips() {
   currentTraveler.findAllTrips(allTrips, allDestinations);
   currentTraveler.sortMyTrips(getToday(), time);
+  console.log('ayo', currentTraveler)
 }
 
 function getFirstName() {
   let firstName = currentTraveler.name.split(' ')[0];
   domUpdates.welcomeTravelerByName(firstName);
-  // welcomeText.innerText = `Welcome, ${firstName};`
 }
