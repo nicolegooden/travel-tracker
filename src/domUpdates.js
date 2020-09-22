@@ -40,7 +40,7 @@ let domUpdates = {
 
   showPresentTrips(currentTraveler) {
     if (currentTraveler.presentTrip !== undefined) {
-      presentTrip.innerHTML = `<h4 class='click-for-popup' id='${currentTraveler.presentTrip.id}'>${currentTraveler.presentTrip}</h4>`;
+      presentTrip.innerHTML = `<h4 class='click-for-popup' tabindex='0' id='${currentTraveler.presentTrip.id}'>${currentTraveler.presentTrip}</h4>`;
       //what if the traveler has more than one presentTrip?
     } else {
       presentTrip.innerHTML = `<h4>You're home, bummer!</h4>`;
@@ -49,19 +49,19 @@ let domUpdates = {
 
   showPastTrips(currentTraveler) {
     currentTraveler.pastTrips.forEach(pastTrip => {
-      pastTrips.innerHTML += `<h4 class='click-for-popup' id='${pastTrip.id}'>${pastTrip.myDestinationData.destination}<br></h4>`;
+      pastTrips.innerHTML += `<h4 class='click-for-popup' tabindex='0' id='${pastTrip.id}'>${pastTrip.myDestinationData.destination}<br></h4>`;
     })
   },
 
   showUpcomingTrips(currentTraveler) {
     currentTraveler.upcomingTrips.forEach(upcomTrip => {
-      upcomingTrips.innerHTML += `<h4 class='click-for-popup' id='${upcomTrip.id}'>${upcomTrip.myDestinationData.destination}<br></h4>`;
+      upcomingTrips.innerHTML += `<h4 class='click-for-popup' tabindex='0' id='${upcomTrip.id}'>${upcomTrip.myDestinationData.destination}<br></h4>`;
     })
   },
   
   showPendingTrips(currentTraveler) {
     currentTraveler.pendingTrips.forEach(pendingTrip => {
-      pendingTrips.innerHTML += `<h4 class='click-for-popup' id='${pendingTrip.id}'>${pendingTrip.myDestinationData.destination}<br></h4>`;
+      pendingTrips.innerHTML += `<h4 class='click-for-popup' tabindex='0' id='${pendingTrip.id}'>${pendingTrip.myDestinationData.destination}<br></h4>`;
     })
   },
 
