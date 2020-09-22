@@ -60,6 +60,7 @@ let apiCalls = {
           return destination.id === requestedTrip.destinationID;
         })
         requestedTrip = new Trip(requestedTrip, myDestinationInfo)
+        currentTraveler.myTrips.push(requestedTrip);
         currentTraveler.pendingTrips.push(requestedTrip);
         domUpdates.updatePendingTripsAfterRequest(currentTraveler);
       })
