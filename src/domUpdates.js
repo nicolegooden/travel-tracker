@@ -10,6 +10,8 @@ let pendingTrips = document.querySelector('.pending-trips-data');
 let yearCost = document.querySelector('.year-cost');
 let destinationSelections = document.querySelector('.destination-selections');
 let costIndicator = document.querySelector('.cost-indicator');
+let popupSection = document.querySelector('.popup-section');
+let popupMain = document.querySelector('.popup-main');
 
 let domUpdates = {
   goToMyDashboard() {
@@ -22,20 +24,36 @@ let domUpdates = {
   }, 
 
   showTripHistory(currentTraveler) {
+    this.showPresentTrips(currentTraveler);
+    this.showPastTrips(currentTraveler);
+    this.showUpcomingTrips(currentTraveler);
+    this.showPendingTrips(currentTraveler);
+  },
+
+  showPresentTrips(currentTraveler) {
     if (currentTraveler.presentTrip !== undefined) {
-      presentTrip.innerText = `${currentTraveler.presentTrip}`;
-   //what if the traveler has more than one presentTrip?
+      presentTrip.innerHTML = `<h4 id='${currentTraveler.presentTrip.id}'>${currentTraveler.presentTrip}</h4>`;
+      //what if the traveler has more than one presentTrip?
     } else {
-      presentTrip.innerText = 'You\'re home, bummer!';
+      presentTrip.innerHTML = `<h4>You're home, bummer!</h4`;
     }
+  },
+
+  showPastTrips(currentTraveler) {
     currentTraveler.pastTrips.forEach(pastTrip => {
-      pastTrips.innerText += `${pastTrip.myDestinationData.destination} \n `;
+      pastTrips.innerHTML += `<h4 id='${pastTrip.id}'>${pastTrip.myDestinationData.destination}<br></h4>`;
     })
+  },
+
+  showUpcomingTrips(currentTraveler) {
     currentTraveler.upcomingTrips.forEach(upcomTrip => {
-      upcomingTrips.innerText += `${upcomTrip.myDestinationData.destination} \n `;
+      upcomingTrips.innerHTML += `<h4 id='${upcomTrip.id}'>${upcomTrip.myDestinationData.destination}<br></h4>`;
     })
+  },
+  
+  showPendingTrips(currentTraveler) {
     currentTraveler.pendingTrips.forEach(pendingTrip => {
-      pendingTrips.innerText += `${pendingTrip.myDestinationData.destination} \n`;
+      pendingTrips.innerHTML += `<h4 id='${pendingTrip.id}'>${pendingTrip.myDestinationData.destination}<br></h4>`;
     })
   },
 
@@ -52,13 +70,31 @@ let domUpdates = {
 
   updatePendingTripsAfterRequest(currentTraveler) {
     pendingTrips.innerText = ' ';
-    currentTraveler.pendingTrips.forEach(pendingTrip => {
-      pendingTrips.innerText += `${pendingTrip.myDestinationData.destination} \n`;
-    })
+    this.showPendingTrips(currentTraveler);
   },
 
   showPotentialTripCost(estimatedCost) {
     costIndicator.innerText = `Estimated Cost: $ ${estimatedCost}`
+  },
+
+  openTripPopup(trip) {
+    popupSection.classList.remove('hidden');
+    popupMain.innerHTML = `<article class='close-popup'>
+      <p class='x-close'>X</p></article>
+      <h3>ID: ${trip.id}<br> 
+       UserID: ${trip.userID}<br> 
+       DestinationID: ${trip.destinationID}<br> 
+       Number of Travelers: ${trip.travelers}<br> 
+       Start Date: ${trip.date}<br> 
+       Duration: ${trip.duration} days <br>  
+      Status: ${trip.status}<br>  
+      Lodging Per Day: $ ${trip.myDestinationData.estimatedLodgingCostPerDay}<br> 
+      Flight Per Person: $ ${trip.myDestinationData.estimatedFlightCostPerPerson}<br> 
+      Paid: $ ${trip.estimateTripCost()}</h3`;
+  }, 
+
+  closeTripPopup() {
+    popupSection.classList.add('hidden');
   }
 }
 

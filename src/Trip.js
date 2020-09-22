@@ -31,7 +31,7 @@ class Trip {
     let totalLodgingCost = this.duration * this.myDestinationData.estimatedLodgingCostPerDay;
     let totalFlightCost = this.travelers * this.myDestinationData.estimatedFlightCostPerPerson;
     let tripCost = totalLodgingCost + totalFlightCost;
-    return ((tripCost * .10) + tripCost);
+    return ((tripCost * .10) + tripCost).toFixed(2);
   }
 }
 
