@@ -12,29 +12,7 @@ let destinationSelections = document.querySelector('.destination-selections');
 let costIndicator = document.querySelector('.cost-indicator');
 let popupSection = document.querySelector('.popup-section');
 let x = document.querySelector('.close-popup');
-let historyBox = document.querySelector('.history-box');
-
-// historyBox.addEventListener('click', () => {
-//   let closestHistorySection = event.target.closest('.data');
-//   closestHistorySection
-// })
-
-
-// presentTrip.addEventListener('click', () => {
-
-// })
-
-// pastTrips.addEventListener('click', () => {
-
-// })
-
-// pendingTrips.addEventListener('click', () => {
-
-// })
-
-// upcomingTrips.addEventListener('click', () => {
-
-// })
+let popupMain = document.querySelector('.popup-main');
 
 let domUpdates = {
   goToMyDashboard() {
@@ -47,20 +25,36 @@ let domUpdates = {
   }, 
 
   showTripHistory(currentTraveler) {
+    this.showPresentTrips(currentTraveler);
+    this.showPastTrips(currentTraveler);
+    this.showUpcomingTrips(currentTraveler);
+    this.showPendingTrips(currentTraveler);
+  },
+
+  showPresentTrips(currentTraveler) {
     if (currentTraveler.presentTrip !== undefined) {
-      presentTrip.innerHTML = `<h4>${currentTraveler.presentTrip}</h4>`;
-   //what if the traveler has more than one presentTrip?
+      presentTrip.innerHTML = `<h4 id='${currentTraveler.presentTrip.id}'>${currentTraveler.presentTrip}</h4>`;
+      //what if the traveler has more than one presentTrip?
     } else {
       presentTrip.innerHTML = `<h4>You're home, bummer!</h4`;
     }
+  },
+
+  showPastTrips(currentTraveler) {
     currentTraveler.pastTrips.forEach(pastTrip => {
-      pastTrips.innerHTML += `<h4>${pastTrip.myDestinationData.destination}<br></h4>`;
+      pastTrips.innerHTML += `<h4 id='${pastTrip.id}'>${pastTrip.myDestinationData.destination}<br></h4>`;
     })
+  },
+
+  showUpcomingTrips(currentTraveler) {
     currentTraveler.upcomingTrips.forEach(upcomTrip => {
-      upcomingTrips.innerHTML += `<h4>${upcomTrip.myDestinationData.destination}<br></h4>`;
+      upcomingTrips.innerHTML += `<h4 id='${upcomTrip.id}'>${upcomTrip.myDestinationData.destination}<br></h4>`;
     })
+  },
+  
+  showPendingTrips(currentTraveler) {
     currentTraveler.pendingTrips.forEach(pendingTrip => {
-      pendingTrips.innerHTML += `<h4>${pendingTrip.myDestinationData.destination}<br></h4>`;
+      pendingTrips.innerHTML += `<h4 id='${pendingTrip}'>${pendingTrip.myDestinationData.destination}<br></h4>`;
     })
   },
 
@@ -86,8 +80,17 @@ let domUpdates = {
     costIndicator.innerText = `Estimated Cost: $ ${estimatedCost}`
   },
 
-  openTripPopup() {
+  openTripPopup(trip) {
     popupSection.classList.remove('hidden');
+    popupMain.innerText = `ID: ${trip.id}\n 
+       UserID: ${trip.userID}\n 
+       DestinationID: ${trip.destinationID}\n  
+       Number of Travlers: ${trip.travelers}\n 
+       Start Date: ${trip.date}\n 
+       Duration: ${trip.duration}\n 
+      Status: ${trip.status}\n 
+      Lodging Per Day: ${trip.myDestinationData.estimatedLodgingCostPerDay}\n
+      Flight Per Person: ${trip.myDestinationData.estimatedFlightCostPerPerson}`;
   }, 
 
   closeTripPopup() {
