@@ -2,11 +2,18 @@ import domUpdates from './domUpdates.js';
 import apiCalls from './apiCalls.js';
 import Traveler from './Traveler.js';
 import time from './time.js';
+import Trip from './Trip.js';
 
 const loginButton = document.querySelector('.login-button');
 let usernameInput = document.querySelector('.username-input');
 let passwordInput = document.querySelector('.password-input');
 const loginDisplay = document.querySelector('.log-in-display');
+let dateInput = document.querySelector('.date-input');
+let durationInput = document.querySelector('.duration-input');
+let travelersInput = document.querySelector('.travelers-input');
+let destinationSelections = document.querySelector('.destination-selections');
+let bookTripButton = document.querySelector('.book-trip-button');
+let showCostButton = document.querySelector('.show-cost-button');
 
 let allTravelers;
 let allTrips;
@@ -19,12 +26,70 @@ window.addEventListener('load', () =>{
     allTrips = data[1];
     allDestinations = data[2];
   })
-  getYearForToday();
 })
 
 loginButton.addEventListener('click', () => {
   attemptLogin()
-});
+})
+
+dateInput.addEventListener('change', formatDateInput);
+bookTripButton.addEventListener('click', submitTripRequest);
+showCostButton.addEventListener('click', estimateTripCostByInputs);
+
+function gatherNewTrip() {
+  let duration = parseInt(durationInput.value);
+  let travelers = parseInt(travelersInput.value);
+  return {
+    id: getID(allTrips),
+    userID: currentTraveler.id,
+    destinationID: getDestinationInfo(),
+    travelers,
+    date: formatDateInput(),
+    duration,
+    status: 'pending',
+    suggestedActivities: []
+  }
+}
+
+function submitTripRequest() {
+  let trip = gatherNewTrip();
+  apiCalls.postNewTrip(trip, currentTraveler, allDestinations);
+  getCostsThisYear();
+}
+
+function estimateTripCostByInputs() {
+  let trip = gatherNewTrip();
+  let myDestinationInfo = allDestinations.find(destination => {
+    return destination.id === trip.destinationID;
+  })
+  let potentialTrip = new Trip (trip, myDestinationInfo);
+  domUpdates.showPotentialTripCost(potentialTrip.estimateTripCost());
+}
+
+function getID(allTrips) {
+  let tripIDList = allTrips.filter(trip => {
+    return trip.id;
+  })
+  tripIDList.sort((a, b) => {
+    return b.id - a.id;
+  })
+  return tripIDList[0].id + 1;
+}
+
+function formatDateInput() {
+  let piecesOfDate = dateInput.value.split('-');
+  let year = piecesOfDate[0];
+  let month = piecesOfDate[1];
+  let day = piecesOfDate[2];
+  return year + '/' + month + '/' + day;
+}
+
+function getDestinationInfo() {
+  let myDesiredSpot = allDestinations.find(destination => {
+    return parseInt(destinationSelections.value) === destination.id;
+  })
+  return myDesiredSpot.id;
+}
 
 function getToday() {
   let today = new Date();
@@ -72,6 +137,7 @@ function checkValidityOfPassword() {
     getFirstName();
     domUpdates.showTripHistory(currentTraveler);
     getCostsThisYear();
+    domUpdates.showDestinationSelections(allDestinations);
   }
 }
 

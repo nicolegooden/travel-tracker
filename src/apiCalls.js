@@ -1,3 +1,6 @@
+import Trip from './Trip.js';
+import domUpdates from './domUpdates.js';
+
 let apiCalls = {
   getAllTravelers() {
     return fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers')
@@ -40,6 +43,30 @@ let apiCalls = {
         console.log(err);
         alert('Oops, all of the information failed to load.');
       })
+  },
+
+  postNewTrip(anotherTrip, currentTraveler, allDestinations) {
+    return fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(anotherTrip), 
+    })
+      .then(response => response.json())
+      .then(data => {
+        let requestedTrip = data.newResource;
+        let myDestinationInfo = allDestinations.find(destination => {
+          return destination.id === requestedTrip.destinationID;
+        })
+        requestedTrip = new Trip(requestedTrip, myDestinationInfo)
+        currentTraveler.pendingTrips.push(requestedTrip);
+        domUpdates.updatePendingTripsAfterRequest(currentTraveler);
+      })
+      .catch(err => {
+        console.log(err)
+        alert('Oops, the trip request cannot be processed at this time.')
+      });
   }
 }
     

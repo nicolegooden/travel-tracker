@@ -38,7 +38,6 @@ class Traveler {
   }
 
   findPastTrips(date, time) {
-    // date = this.convertSingleDate(date);
     this.myTrips.forEach(trip => {
       let tripStart = trip.date;
       let tripDuration = trip.duration;
@@ -52,7 +51,6 @@ class Traveler {
 
   findPresentTrip(date, time) {
     let presentTrip;
-    // date = this.convertSingleDate(date);
     this.myTrips.forEach(trip => {
       let tripStart = trip.date;
       let tripDuration = trip.duration;
@@ -64,15 +62,6 @@ class Traveler {
     this.presentTrip = presentTrip;
     return this.presentTrip;
   }
-
-  // convertSingleDate(date) {
-  //   let [year, month, day] = date.split('/');
-  //   date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-  //   return date;
-  // }
-  //move these convert methods to scripts
-  //because they are not the responsibility 
-  //of the traveler!!!
 
   findUpcomingTrips(date, time) {
     // let parsedDate = this.convertSingleDate(date);
@@ -113,21 +102,3 @@ class Traveler {
 }
 
 export default Traveler;
-
-  // requestNewTrip(date, duration, travelers, destination, allDestinations, allTrips) {
-  //   let tripData = {
-  //     userID: this.id,
-  //     travelers,
-  //     date,
-  //     duration,
-  //     destination,
-  //     status: 'pending',
-  //     suggestedActivities: []
-  //   }
-  //   let requestedTrip = new Trip(tripData, myDestinationData);
-  //   requestedTrip.determineDestinationID(allDestinations);
-  //   requestedTrip.getID(allTrips);
-  //   delete requestedTrip.destination;
-  //   this.myTrips.push(requestedTrip);
-  //   return requestedTrip;
-  // }
