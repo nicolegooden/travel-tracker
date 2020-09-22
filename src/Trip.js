@@ -1,19 +1,19 @@
 class Trip {
   constructor(tripData, myDestinationData) {
-    this.duration = tripData.duration;
-    this.travelers = tripData.travelers;
-    this.myDestinationData = myDestinationData;
-    this.destinationID = myDestinationData.id;
-    this.userID = tripData.userID;
-    this.status = tripData.status || 'pending';
     this.id = tripData.id;
-    this.suggestedActivities = tripData.suggestedActivities;
+    this.userID = tripData.userID;
+    this.destinationID = myDestinationData.id;
+    this.travelers = tripData.travelers;
     if (tripData.date instanceof Date) {
       this.date = tripData.date;
     } else {
       let [year, month, day] = tripData.date.split('/');
       this.date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day))
     }
+    this.duration = tripData.duration;
+    this.status = tripData.status || 'pending';
+    this.suggestedActivities = tripData.suggestedActivities;
+    this.myDestinationData = myDestinationData;
   }
 
   getID(allTrips) {
