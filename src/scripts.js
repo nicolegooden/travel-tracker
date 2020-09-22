@@ -14,6 +14,7 @@ let travelersInput = document.querySelector('.travelers-input');
 let destinationSelections = document.querySelector('.destination-selections');
 let bookTripButton = document.querySelector('.book-trip-button');
 let showCostButton = document.querySelector('.show-cost-button');
+let historyBox = document.querySelector('.history-box');
 
 let allTravelers;
 let allTrips;
@@ -25,6 +26,14 @@ window.addEventListener('load', () =>{
     allTravelers = data[0];
     allTrips = data[1];
     allDestinations = data[2];
+  })
+})
+
+historyBox.addEventListener('click', (event) => {
+  currentTraveler.myTrips.forEach(myTrip => {
+    if (parseInt(event.target.id) === myTrip.id) {
+      domUpdates.openTripPopup(myTrip);
+    }
   })
 })
 
@@ -142,8 +151,8 @@ function checkValidityOfPassword() {
 }
 
 function resetLoginInputs() {
-  usernameInput.value = ' ';
-  passwordInput.value = ' ';
+  usernameInput.value = '';
+  passwordInput.value = '';
 }
 
 function createTraveler() {
