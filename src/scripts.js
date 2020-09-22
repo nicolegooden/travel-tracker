@@ -62,7 +62,9 @@ function checkValidityOfPassword() {
   } else {
     domUpdates.goToMyDashboard();
     createTraveler()
+    domUpdates.welcomeTravelerByName();
     determineTravelerTrips();
+    getFirstName();
   }
 }
 
@@ -80,4 +82,10 @@ function createTraveler() {
 function determineTravelerTrips() {
   currentTraveler.findAllTrips(allTrips, allDestinations);
   currentTraveler.sortMyTrips(getToday(), time);
+}
+
+function getFirstName() {
+  let firstName = currentTraveler.name.split(' ')[0];
+  domUpdates.welcomeTravelerByName(firstName);
+  // welcomeText.innerText = `Welcome, ${firstName};`
 }
