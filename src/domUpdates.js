@@ -11,7 +11,6 @@ let yearCost = document.querySelector('.year-cost');
 let destinationSelections = document.querySelector('.destination-selections');
 let costIndicator = document.querySelector('.cost-indicator');
 let popupSection = document.querySelector('.popup-section');
-let x = document.querySelector('.close-popup');
 let popupMain = document.querySelector('.popup-main');
 
 // x.addEventListener('click', closeTripPopup)
@@ -84,23 +83,22 @@ let domUpdates = {
 
   openTripPopup(trip) {
     popupSection.classList.remove('hidden');
-    //change innerText to innerHTML
-    //add it wherever inside innerHTML
-    popupMain.innerText = `ID: ${trip.id}\n 
-       UserID: ${trip.userID}\n 
-       DestinationID: ${trip.destinationID}\n  
-       Number of Travelers: ${trip.travelers}\n 
-       Start Date: ${trip.date}\n 
-       Duration: ${trip.duration} days\n 
-      Status: ${trip.status}\n 
-      Lodging Per Day: $ ${trip.myDestinationData.estimatedLodgingCostPerDay}\n
-      Flight Per Person: $ ${trip.myDestinationData.estimatedFlightCostPerPerson}`;
+    popupMain.innerHTML = `<article class='close-popup'>
+      <p class='x-close'>X</p></article>
+      <h3>ID: ${trip.id}<br> 
+       UserID: ${trip.userID}<br> 
+       DestinationID: ${trip.destinationID}<br> 
+       Number of Travelers: ${trip.travelers}<br> 
+       Start Date: ${trip.date}<br> 
+       Duration: ${trip.duration} days <br>  
+      Status: ${trip.status}<br>  
+      Lodging Per Day: $ ${trip.myDestinationData.estimatedLodgingCostPerDay}<br> 
+      Flight Per Person: $ ${trip.myDestinationData.estimatedFlightCostPerPerson}<br> 
+      Paid: $ ${trip.estimateTripCost()}</h3`;
   }, 
 
   closeTripPopup() {
     popupSection.classList.add('hidden');
-    //this is to be called when the x is clicked on the popup
-    //maybe x variable needs to exist in scripts instead
   },
 
   getTripDetails() {
