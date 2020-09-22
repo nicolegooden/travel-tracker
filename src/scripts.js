@@ -18,7 +18,8 @@ window.addEventListener('load', () =>{
     allTravelers = data[0];
     allTrips = data[1];
     allDestinations = data[2];
-  }); 
+  })
+  getYearForToday();
 })
 
 loginButton.addEventListener('click', () => {
@@ -28,6 +29,10 @@ loginButton.addEventListener('click', () => {
 function getToday() {
   let today = new Date();
   return today;
+}
+
+function getYearForToday() {
+  return getToday().getYear() + 1900;
 }
 
 function attemptLogin() {
@@ -66,6 +71,7 @@ function checkValidityOfPassword() {
     determineTravelerTrips();
     getFirstName();
     domUpdates.showTripHistory(currentTraveler);
+    getCostsThisYear();
   }
 }
 
@@ -83,10 +89,14 @@ function createTraveler() {
 function determineTravelerTrips() {
   currentTraveler.findAllTrips(allTrips, allDestinations);
   currentTraveler.sortMyTrips(getToday(), time);
-  console.log('ayo', currentTraveler)
 }
 
 function getFirstName() {
   let firstName = currentTraveler.name.split(' ')[0];
   domUpdates.welcomeTravelerByName(firstName);
+}
+
+function getCostsThisYear() {
+  let moneyThisYear = currentTraveler.calculateCostsThisYear(getYearForToday());
+  domUpdates.showCostsThisYear(moneyThisYear)
 }
