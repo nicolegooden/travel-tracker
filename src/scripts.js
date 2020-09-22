@@ -1,9 +1,11 @@
 import domUpdates from './domUpdates.js';
 import apiCalls from './apiCalls.js';
+import Traveler from './Traveler.js';
 
 const loginButton = document.querySelector('.login-button');
 let usernameInput = document.querySelector('.username-input');
 let passwordInput = document.querySelector('.password-input');
+const loginDisplay = document.querySelector('.log-in-display');
 
 let allTravelers;
 let allTrips;
@@ -53,6 +55,7 @@ function checkValidityOfPassword() {
     resetLoginInputs();
   } else {
     domUpdates.goToMyDashboard();
+    createTraveler()
   }
 }
 
@@ -60,3 +63,13 @@ function resetLoginInputs() {
   usernameInput.value = ' ';
   passwordInput.value = ' ';
 }
+
+function createTraveler() {
+  if (loginDisplay.classList.contains('hidden-important')) {
+    currentTraveler = new Traveler(currentTraveler);
+  }
+}
+
+// function determineTravelerTrips() {
+//   currentTraveler
+// }
