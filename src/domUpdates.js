@@ -7,6 +7,7 @@ let presentTrip = document.querySelector('.present-trip-data');
 let pastTrips = document.querySelector('.past-trips-data');
 let upcomingTrips = document.querySelector('.upcoming-trips-data');
 let pendingTrips = document.querySelector('.pending-trips-data');
+let yearCost = document.querySelector('.year-cost');
 
 let domUpdates = {
   goToMyDashboard() {
@@ -21,6 +22,7 @@ let domUpdates = {
   showTripHistory(currentTraveler) {
     if (currentTraveler.presentTrip !== undefined) {
       presentTrip.innerText = `${currentTraveler.presentTrip}`;
+   //what if the traveler has more than one presentTrip?
     } else {
       presentTrip.innerText = 'You\'re home, bummer!';
     }
@@ -33,6 +35,10 @@ let domUpdates = {
     currentTraveler.pendingTrips.forEach(pendingTrip => {
       pendingTrips.innerText += `${pendingTrip.myDestinationData.destination} \n`;
     })
+  },
+
+  showCostsThisYear(moneyThisYear) {
+    yearCost.innerText = `$ ${moneyThisYear}`
   }
 }
 
