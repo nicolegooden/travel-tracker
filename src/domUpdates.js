@@ -8,6 +8,7 @@ let pastTrips = document.querySelector('.past-trips-data');
 let upcomingTrips = document.querySelector('.upcoming-trips-data');
 let pendingTrips = document.querySelector('.pending-trips-data');
 let yearCost = document.querySelector('.year-cost');
+let destinationSelections = document.querySelector('.destination-selections');
 
 let domUpdates = {
   goToMyDashboard() {
@@ -39,6 +40,13 @@ let domUpdates = {
 
   showCostsThisYear(moneyThisYear) {
     yearCost.innerText = `$ ${moneyThisYear}`
+  },
+
+  showDestinationSelections(allDestinations) {
+    allDestinations.forEach(destination => {
+      destinationSelections.innerHTML += 
+      `<option value='${destination.id}'>${destination.destination}</option>`;
+    })
   }
 }
 
