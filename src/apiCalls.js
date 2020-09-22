@@ -1,4 +1,5 @@
 import Trip from './Trip.js';
+import domUpdates from './domUpdates.js';
 
 let apiCalls = {
   getAllTravelers() {
@@ -60,6 +61,7 @@ let apiCalls = {
         })
         requestedTrip = new Trip(requestedTrip, myDestinationInfo)
         currentTraveler.pendingTrips.push(requestedTrip);
+        domUpdates.updatePendingTripsAfterRequest(currentTraveler);
       })
       .catch(err => {
         console.log(err)
