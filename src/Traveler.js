@@ -64,7 +64,6 @@ class Traveler {
   }
 
   findUpcomingTrips(date, time) {
-    // let parsedDate = this.convertSingleDate(date);
     let upcomingTrips = this.myTrips.filter(trip => {
       return !time.isBefore(trip.date, date) && 
       !time.isEqual(trip.date, date);
@@ -95,7 +94,7 @@ class Traveler {
       return trip.date.getUTCFullYear() === parseInt(year);
     })
     return tripsThisYear.reduce((yearCost, trip) => {
-      yearCost += trip.estimateTripCost();
+      yearCost += parseFloat(trip.estimateTripCost());
       return yearCost;
     }, 0)      
   }
