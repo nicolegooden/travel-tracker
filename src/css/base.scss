@@ -69,6 +69,21 @@ main {
   grid-gap: 5%;
 }
 
+.logout-button:hover {
+  cursor: pointer;
+  background-color: #D9EAEA;
+}
+
+.show-cost-button:hover {
+  cursor: pointer;
+  background-color: #D9EAEA;
+}
+
+.book-trip-button:hover {
+  cursor: pointer;
+  background-color: #D9EAEA;
+}
+
 .plan-and-history {
   display: flex;
   justify-content: space-around;
