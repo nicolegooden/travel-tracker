@@ -1,3 +1,5 @@
+import Trip from './Trip.js';
+
 let apiCalls = {
   getAllTravelers() {
     return fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers')
@@ -42,7 +44,7 @@ let apiCalls = {
       })
   },
 
-  postNewTrip(anotherTrip, currentTraveler) {
+  postNewTrip(anotherTrip, currentTraveler, allDestinations) {
     return fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips', {
       method: 'POST',
       headers: {
@@ -52,8 +54,12 @@ let apiCalls = {
     })
       .then(response => response.json())
       .then(data => {
-        currentTraveler.pendingTrips.push(data.newResource);
-        console.log(currentTraveler.pendingTrips)
+        let requestedTrip = data.newResource;
+        let myDestinationInfo = allDestinations.find(destination => {
+          return destination.id === requestedTrip.destinationID;
+        })
+        requestedTrip = new Trip(requestedTrip, myDestinationInfo)
+        currentTraveler.pendingTrips.push(requestedTrip);
       })
       .catch(err => {
         console.log(err)
