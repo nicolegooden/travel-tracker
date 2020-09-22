@@ -85,7 +85,7 @@ describe('Trip', () => {
       let totalLodgingCost = tripData.duration * estimatedLodgingCostPerDay;
       let totalFlightCost = tripData.travelers * estimatedFlightCostPerPerson;
       let tripCost = totalLodgingCost + totalFlightCost;
-      return ((tripCost * .10) + tripCost);
+      return ((tripCost * .10) + tripCost).toFixed(2);
     };
 
     expect(trip.estimateTripCost()).to.equal(estimateTripCost());
