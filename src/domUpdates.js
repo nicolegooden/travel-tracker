@@ -47,6 +47,13 @@ let domUpdates = {
       destinationSelections.innerHTML += 
       `<option value='${destination.id}'>${destination.destination}</option>`;
     })
+  },
+
+  updatePendingTripsAfterRequest(currentTraveler) {
+    pendingTrips.innerText = ' ';
+    currentTraveler.pendingTrips.forEach(pendingTrip => {
+      pendingTrips.innerText += `${pendingTrip.myDestinationData.destination} \n`;
+    })
   }
 }
 
