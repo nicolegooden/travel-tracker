@@ -13,8 +13,6 @@ let costIndicator = document.querySelector('.cost-indicator');
 let popupSection = document.querySelector('.popup-section');
 let popupMain = document.querySelector('.popup-main');
 
-// x.addEventListener('click', closeTripPopup)
-
 let domUpdates = {
   goToMyDashboard() {
     loginDisplay.classList.add('hidden-important');
@@ -55,7 +53,7 @@ let domUpdates = {
   
   showPendingTrips(currentTraveler) {
     currentTraveler.pendingTrips.forEach(pendingTrip => {
-      pendingTrips.innerHTML += `<h4 id='${pendingTrip}'>${pendingTrip.myDestinationData.destination}<br></h4>`;
+      pendingTrips.innerHTML += `<h4 id='${pendingTrip.id}'>${pendingTrip.myDestinationData.destination}<br></h4>`;
     })
   },
 
@@ -72,9 +70,7 @@ let domUpdates = {
 
   updatePendingTripsAfterRequest(currentTraveler) {
     pendingTrips.innerText = ' ';
-    currentTraveler.pendingTrips.forEach(pendingTrip => {
-      pendingTrips.innerText += `${pendingTrip.myDestinationData.destination} \n`;
-    })
+    this.showPendingTrips(currentTraveler);
   },
 
   showPotentialTripCost(estimatedCost) {
@@ -99,11 +95,6 @@ let domUpdates = {
 
   closeTripPopup() {
     popupSection.classList.add('hidden');
-  },
-
-  getTripDetails() {
-    //when openTripPopup() is fired
-
   }
 }
 
