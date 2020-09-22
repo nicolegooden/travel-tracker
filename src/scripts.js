@@ -72,6 +72,7 @@ function checkValidityOfPassword() {
     getFirstName();
     domUpdates.showTripHistory(currentTraveler);
     getCostsThisYear();
+    domUpdates.showDestinationSelections(allDestinations);
   }
 }
 
