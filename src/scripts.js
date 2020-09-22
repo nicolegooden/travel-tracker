@@ -1,9 +1,12 @@
 import domUpdates from './domUpdates.js';
 import apiCalls from './apiCalls.js';
+import Traveler from './Traveler.js';
+import time from './time.js';
 
 const loginButton = document.querySelector('.login-button');
 let usernameInput = document.querySelector('.username-input');
 let passwordInput = document.querySelector('.password-input');
+const loginDisplay = document.querySelector('.log-in-display');
 
 let allTravelers;
 let allTrips;
@@ -15,12 +18,22 @@ window.addEventListener('load', () =>{
     allTravelers = data[0];
     allTrips = data[1];
     allDestinations = data[2];
-  }); 
+  })
+  getYearForToday();
 })
 
 loginButton.addEventListener('click', () => {
   attemptLogin()
 });
+
+function getToday() {
+  let today = new Date();
+  return today;
+}
+
+function getYearForToday() {
+  return getToday().getYear() + 1900;
+}
 
 function attemptLogin() {
   if (usernameInput.value !== ' ' && passwordInput.value !== ' ') {
@@ -53,10 +66,37 @@ function checkValidityOfPassword() {
     resetLoginInputs();
   } else {
     domUpdates.goToMyDashboard();
+    createTraveler()
+    domUpdates.welcomeTravelerByName();
+    determineTravelerTrips();
+    getFirstName();
+    domUpdates.showTripHistory(currentTraveler);
+    getCostsThisYear();
   }
 }
 
 function resetLoginInputs() {
   usernameInput.value = ' ';
   passwordInput.value = ' ';
+}
+
+function createTraveler() {
+  if (loginDisplay.classList.contains('hidden-important')) {
+    currentTraveler = new Traveler(currentTraveler);
+  }
+}
+
+function determineTravelerTrips() {
+  currentTraveler.findAllTrips(allTrips, allDestinations);
+  currentTraveler.sortMyTrips(getToday(), time);
+}
+
+function getFirstName() {
+  let firstName = currentTraveler.name.split(' ')[0];
+  domUpdates.welcomeTravelerByName(firstName);
+}
+
+function getCostsThisYear() {
+  let moneyThisYear = currentTraveler.calculateCostsThisYear(getYearForToday());
+  domUpdates.showCostsThisYear(moneyThisYear)
 }
