@@ -9,6 +9,7 @@ let upcomingTrips = document.querySelector('.upcoming-trips-data');
 let pendingTrips = document.querySelector('.pending-trips-data');
 let yearCost = document.querySelector('.year-cost');
 let destinationSelections = document.querySelector('.destination-selections');
+let costIndicator = document.querySelector('.cost-indicator');
 
 let domUpdates = {
   goToMyDashboard() {
@@ -54,6 +55,10 @@ let domUpdates = {
     currentTraveler.pendingTrips.forEach(pendingTrip => {
       pendingTrips.innerText += `${pendingTrip.myDestinationData.destination} \n`;
     })
+  },
+
+  showPotentialTripCost(estimatedCost) {
+    costIndicator.innerText = `Estimated Cost: $ ${estimatedCost}`
   }
 }
 
