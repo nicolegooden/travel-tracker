@@ -15,6 +15,8 @@ let destinationSelections = document.querySelector('.destination-selections');
 let bookTripButton = document.querySelector('.book-trip-button');
 let showCostButton = document.querySelector('.show-cost-button');
 let historyBox = document.querySelector('.history-box');
+let x = document.querySelector('.close-popup');
+let popupSection = document.querySelector('.popup-section');
 
 let allTravelers;
 let allTrips;
@@ -27,6 +29,12 @@ window.addEventListener('load', () =>{
     allTrips = data[1];
     allDestinations = data[2];
   })
+})
+
+popupSection.addEventListener('click', () => {
+  if (event.target.classList.contains('x-close')) {
+    domUpdates.closeTripPopup();
+  }
 })
 
 historyBox.addEventListener('click', (event) => {
