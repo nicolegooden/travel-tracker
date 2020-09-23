@@ -1,6 +1,5 @@
 import chai from 'chai';
 const expect = chai.expect;
-//const { expect } = require("chai");
 import time from '../src/time.js';
 import allTravelers from '../data/travelers.js'
 import allTrips from '../data/trips.js'
@@ -117,7 +116,6 @@ describe('Traveler', () => {
 
   it.skip('should be able to request a new trip', () => {
     let date = '2020/10/26';
-    // date = traveler.convertSingleDate(date);
     const duration = 4;
     const travelers = 3;
     const destination = 'Stockholm, Sweden';

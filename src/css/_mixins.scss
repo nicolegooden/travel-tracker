@@ -1,0 +1,21 @@
+@mixin flex-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+  
+@mixin section-text() {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem; 
+}
+  
+@mixin hover-buttons() {
+  cursor: pointer;
+  background-color: #D9EAEA;
+}
+  
+@mixin box-dimensions() {
+  height: 85%;
+  width: 100%;
+}

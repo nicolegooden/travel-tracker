@@ -6,27 +6,26 @@
   <body>
     <header class='header'>
       <h1>Travel Tracker</h1>
-      <h2 class='welcome-name'>Welcome, </h2>
+      <h2 class='welcome-name'></h2>
     </header>
+    <button class='logout-button hidden' tabindex='0'>LOGOUT</button>
     <main class='main'>
       <section class='log-in-display'>
         <h2 class='log-in-here'>Login Here</h2>
         <section class='username-section'>
-          <!-- <h3 class='username-indicator'>Username: </h3> -->
           <label for='username' class='username-indicator'>
             Enter username: 
-            <input class='username-input' type='text'>
+            <input class='username-input' tabindex='0' type='text'>
           </label>
         </section>
         <section class='password-section'>
-          <!-- <h3 class='password-indicator'>Password: </h3> -->
           <label for='password' class='password-indicator'>
             Enter password:
-            <input class='password-input' type='text'>
+            <input tabindex='0' class='password-input' type='text'>
           </label>
         </section>
         <section class='submit-login-criteria'>
-          <button class='login-button'>LOGIN</button>
+          <button class='login-button' tabindex='0'>LOGIN</button>
         </section>
       </section>
       <section class='dashboard-display hidden-important'>
@@ -34,33 +33,33 @@
           <section class='plan-box'>
             <article class='date-article'>
               <h2 class='date indicator'>Trip Start: </h2>
-                <input aria-label='date-input' class='date-input' type='date' value='YYYY/MM/DD'>
+                <input aria-label='date-input' tabindex='0' class='date-input' type='date' value='YYYY/MM/DD'>
             </article>
             <article class='duration-article'>
               <h2 class='duration-indicator'>Duration: </h2>
               <label for='duration'>
-                <input class='duration-input' value='1' min='1' type='number'>
+                <input class='duration-input' tabindex='0' value='1' min='1' type='number'>
               </label>
               <h3 class='days-text'> in days</h3>
             </article>
             <article class='travelers-article'>
               <h2 class='travelers-indicator'>Travelers: </h2>
               <label for='number-of-travelers'>
-                <input class='travelers-input' value='1' min='1' type='number'>
+                <input class='travelers-input' tabindex='0' value='1' min='1' type='number'>
               </label>
             </article>
             <article class='destination-article'>
               <h2 class='destination-indicator'>Choose Destination: </h2>
               <label for="destinations">Select Destination</label>
-              <select class='destination-selections' name='destinations' id='destinations'>
+              <select class='destination-selections' tabindex='0' name='destinations' id='destinations'>
               </select>
             </article>
             <article class='cost-article'>
-              <button class='show-cost-button'>Verify Cost</button>
+              <button class='show-cost-button' tabindex='0'>Verify Cost</button>
               <h3 class='cost-indicator'></h3>
             </article>
             <article class='submit-trip-request'>
-              <button class='book-trip-button'>Book Trip!</button>
+              <button class='book-trip-button' tabindex='0'>Book Trip!</button>
             </article>
           </section>
           <h2 class='trip-history dashboard'>Trip History</h2>
@@ -92,6 +91,5 @@
         </article>
       </section>
     </main>
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
 </html>

@@ -15,17 +15,6 @@ class Trip {
     this.suggestedActivities = tripData.suggestedActivities;
     this.myDestinationData = myDestinationData;
   }
-
-  getID(allTrips) {
-    let tripIDList = allTrips.filter(trip => {
-      return trip.id;
-    })
-    tripIDList.sort((a, b) => {
-      return b.id - a.id;
-    });
-    this.id = tripIDList[0].id + 1
-    return this.id;
-  }
   
   estimateTripCost() {
     let totalLodgingCost = this.duration * this.myDestinationData.estimatedLodgingCostPerDay;

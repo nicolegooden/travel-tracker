@@ -15,13 +15,19 @@ let destinationSelections = document.querySelector('.destination-selections');
 let bookTripButton = document.querySelector('.book-trip-button');
 let showCostButton = document.querySelector('.show-cost-button');
 let historyBox = document.querySelector('.history-box');
-let x = document.querySelector('.close-popup');
 let popupSection = document.querySelector('.popup-section');
+let logoutButton = document.querySelector('.logout-button');
 
 let allTravelers;
 let allTrips;
 let allDestinations;
 let currentTraveler;
+
+logoutButton.addEventListener('click', logOut)
+loginButton.addEventListener('click', attemptLogin)
+dateInput.addEventListener('change', formatDateInput);
+bookTripButton.addEventListener('click', submitTripRequest);
+showCostButton.addEventListener('click', estimateTripCostByInputs);
 
 window.addEventListener('load', () =>{
   apiCalls.accessAllData().then(data => {
@@ -45,13 +51,11 @@ historyBox.addEventListener('click', (event) => {
   })
 })
 
-loginButton.addEventListener('click', () => {
-  attemptLogin()
-})
-
-dateInput.addEventListener('change', formatDateInput);
-bookTripButton.addEventListener('click', submitTripRequest);
-showCostButton.addEventListener('click', estimateTripCostByInputs);
+function logOut() {
+  domUpdates.goBackToLogin();
+  logoutButton.classList.add('hidden');
+  resetLoginInputs();
+}
 
 function gatherNewTrip() {
   let duration = parseInt(durationInput.value);
@@ -71,7 +75,7 @@ function gatherNewTrip() {
 function submitTripRequest() {
   let trip = gatherNewTrip();
   apiCalls.postNewTrip(trip, currentTraveler, allDestinations);
-  getCostsThisYear();
+  alert('Success! Your trip has been booked.  To view trip details, click on your last trip destination under Pending Trips.');
 }
 
 function estimateTripCostByInputs() {
@@ -147,15 +151,19 @@ function checkValidityOfPassword() {
     alert(`This password is invalid.  Please try again.`);
     resetLoginInputs();
   } else {
-    domUpdates.goToMyDashboard();
-    createTraveler()
-    domUpdates.welcomeTravelerByName();
-    determineTravelerTrips();
-    getFirstName();
-    domUpdates.showTripHistory(currentTraveler);
-    getCostsThisYear();
-    domUpdates.showDestinationSelections(allDestinations);
+    loadTravelerDashboard();
   }
+}
+
+function loadTravelerDashboard() {
+  domUpdates.goToMyDashboard();
+  createTraveler()
+  domUpdates.welcomeTravelerByName();
+  determineTravelerTrips();
+  getFirstName();
+  domUpdates.showTripHistory(currentTraveler);
+  getCostsThisYear();
+  domUpdates.showDestinationSelections(allDestinations);
 }
 
 function resetLoginInputs() {
