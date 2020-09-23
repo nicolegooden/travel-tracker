@@ -1,8 +1,6 @@
 import chai from 'chai';
 const expect = chai.expect;
-//const { expect } = require("chai");
 import allTrips from '../data/trips.js'
-import allDestinations from '../data/destinations.js';
 import Trip from '../src/Trip.js';
 
 describe('Trip', () => {
