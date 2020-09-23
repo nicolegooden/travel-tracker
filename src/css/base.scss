@@ -1,30 +1,22 @@
-/* This is an example of using Sass, otherwise plain CSS works too*/
-
 @import 'normalize';
-
-$primary-background: #40B0A6;
-
-@mixin flex-center() {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+@import 'variables';
+@import 'mixins';
 
 html {
-  height: 100%;
+  height: $full-height;
 }
 
 body {
   background: $primary-background;
-  height: 100%;
+  height: $full-height;
 }
 
 main {
-  height: 100%;
+  height: $full-height;
 }
 
 .header {
-  background-color: #F5F5DC;
+  background-color: $feature-background;
   display: flex;
   justify-content: space-between;
   border-bottom: solid;
@@ -44,10 +36,6 @@ main {
   margin-right: 1rem;
 }
 
-.password-section {
-  @include flex-center();
-}
-
 .password-indicator {
   margin-right: 1rem;
 }
@@ -61,12 +49,16 @@ main {
 }
 
 .dashboard-display {
-  height: 100%;
+  height: $full-height;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr 5fr;
   place-items: center;
   grid-gap: 5%;
+}
+
+.logout-button:hover, .show-cost-button:hover, .book-trip-button:hover {
+  @include hover-buttons();
 }
 
 .plan-and-history {
@@ -87,45 +79,31 @@ main {
 .plan-box {
  grid-row-start: 2;
  grid-column-start: 1;
- background-color:#F5F5DC;
- height: 85%;
- width: 100%;
+ background-color: $feature-background;
+ @include box-dimensions();
 }
 
 .history-box {
  grid-row-start: 2;
  grid-column-start: 2;
- background-color: #F5F5DC;
- height: 85%;
- width: 100%;
+ background-color: $feature-background;
+ @include box-dimensions();
  display: grid;
  grid-template-columns: repeat(2, 1fr);
  grid-template-rows: 2fr 2fr 0.5fr;
  text-align: center;
 }
 
-.date-article {
-  @include flex-center();
-}
-
 .date-indicator {
   margin-right: 1rem;
 }
 
-.duration-article {
-  @include flex-center();
-}
-
-.travelers-article {
+.duration-article, .travelers-article, .cost-article, .date-article, .password-section {
   @include flex-center();
 }
 
 .destination-article {
   text-align: center;
-}
-
-.cost-article {
-  @include flex-center();
 }
 
 .book-trip-button {
@@ -145,8 +123,7 @@ main {
   margin-top: 2rem;
 
   &:hover {
-    cursor: pointer;
-    background-color: #D9EAEA
+    @include hover-buttons();
   }
 }
 
@@ -161,8 +138,9 @@ main {
 
 .popup-main {
   position: fixed;
-  width: 800px;
-  height: 400px;
+  text-align: center;
+  width: 70%;
+  height: 70%;
   border: 2px solid black;
   border-radius: 5px;
   background-color: white;
@@ -177,7 +155,6 @@ main {
   width: 25px;
   height: 25px;
   border-radius: 25px;
-  // border: 2px solid black;
   text-align: center;
   right: 5px;
   top: 5px;
@@ -190,26 +167,23 @@ main {
   font-weight: bold;
 }
 
-@media screen and (max-width: 630px) {
+.click-for-popup:hover {
+  cursor: pointer;
+  color: blue;
+}
+
+@media screen and (max-width: 650px) {
   .log-in-here {
     padding-top: 5rem;
   }
 
   .dashboard-display {
-    height: 100%;
+    height: $full-height;
     display: block;
   }
 
-  .plan-my-trip-text {
-    text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-
-  .trip-history {
-    text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+  .plan-my-trip-text, .trip-history {
+    @include section-text();
   }
 
   .history-box {
@@ -229,5 +203,13 @@ main {
   .submit-trip-request {
     position: absolute;
     width: 100%;
+  }
+
+  .popup-section {
+    overflow-wrap: break-word;
+  }
+
+  .popup-main {
+    left: 95%;
   }
 }

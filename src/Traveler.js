@@ -11,7 +11,6 @@ class Traveler {
     this.presentTrip;
     this.upcomingTrips = [];
     this.pendingTrips = [];
-    this.password = 'travel2020';
   }
 
   findAllTrips(allTrips, allDestinations) {
@@ -82,11 +81,6 @@ class Traveler {
       this.pendingTrips.push(trip)
     })
     return this.pendingTrips;
-  }
-
-  determineUsername() {
-    this.username = `traveler${this.id}`;
-    return this.username;
   }
 
   calculateCostsThisYear(year) {
