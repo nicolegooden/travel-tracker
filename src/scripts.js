@@ -23,6 +23,12 @@ let allTrips;
 let allDestinations;
 let currentTraveler;
 
+logoutButton.addEventListener('click', logOut)
+loginButton.addEventListener('click', attemptLogin)
+dateInput.addEventListener('change', formatDateInput);
+bookTripButton.addEventListener('click', submitTripRequest);
+showCostButton.addEventListener('click', estimateTripCostByInputs);
+
 window.addEventListener('load', () =>{
   apiCalls.accessAllData().then(data => {
     allTravelers = data[0];
@@ -44,12 +50,6 @@ historyBox.addEventListener('click', (event) => {
     }
   })
 })
-
-logoutButton.addEventListener('click', logOut)
-loginButton.addEventListener('click', attemptLogin)
-dateInput.addEventListener('change', formatDateInput);
-bookTripButton.addEventListener('click', submitTripRequest);
-showCostButton.addEventListener('click', estimateTripCostByInputs);
 
 function logOut() {
   domUpdates.goBackToLogin();
@@ -151,15 +151,19 @@ function checkValidityOfPassword() {
     alert(`This password is invalid.  Please try again.`);
     resetLoginInputs();
   } else {
-    domUpdates.goToMyDashboard();
-    createTraveler()
-    domUpdates.welcomeTravelerByName();
-    determineTravelerTrips();
-    getFirstName();
-    domUpdates.showTripHistory(currentTraveler);
-    getCostsThisYear();
-    domUpdates.showDestinationSelections(allDestinations);
+    loadTravelerDashboard();
   }
+}
+
+function loadTravelerDashboard() {
+  domUpdates.goToMyDashboard();
+  createTraveler()
+  domUpdates.welcomeTravelerByName();
+  determineTravelerTrips();
+  getFirstName();
+  domUpdates.showTripHistory(currentTraveler);
+  getCostsThisYear();
+  domUpdates.showDestinationSelections(allDestinations);
 }
 
 function resetLoginInputs() {
