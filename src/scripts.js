@@ -75,7 +75,6 @@ function gatherNewTrip() {
 function submitTripRequest() {
   let trip = gatherNewTrip();
   apiCalls.postNewTrip(trip, currentTraveler, allDestinations);
-  getCostsThisYear();
   alert('Success! Your trip has been booked.  To view trip details, click on your last trip destination under Pending Trips.');
 }
 
