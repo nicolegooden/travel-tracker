@@ -47,7 +47,7 @@ This project allows a prospective traveler to log in to their `Travel Tracker` a
 
 + Remove many query selectors from global scope to local scope.  Some are used only once and, in that case, they do not need to be accessed globally.  Definitely can clean that up!
 
-+ Change the `currentTraveler` property for `presentTrip` to be an array, to account for the edge case that a `Traveler` could be on two trips.
++ Currently, a single present trip belonging to the `Traveler` shows up as `[object Object]` on the DOM.  Debug this in the event the traveler is on a trip at the time of login.
 
 + Fix bug related to confirmation alert (when trip is booked).  If the user does not select a date, the alert will show up even though a trip with invalid criteria was requested.  The confirmation alert shows, then the error alert from the POST request shows, and the trip is not added to the list of pending trips.  In a future iteration, I plan to only show the confirmation alert is the trip has been successfully displayed as a pending trip on the dashboard.
 
