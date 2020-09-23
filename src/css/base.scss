@@ -1,32 +1,6 @@
-/* This is an example of using Sass, otherwise plain CSS works too*/
-
 @import 'normalize';
-
-$primary-background: #40B0A6;
-$feature-background: #F5F5DC;
-$full-height: 100%;
-
-@mixin flex-center() {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@mixin section-text() {
-  text-align: center;
-  margin-top: 2rem;
-  margin-bottom: 2rem; 
-}
-
-@mixin hover-buttons() {
-  cursor: pointer;
-  background-color: #D9EAEA;
-}
-
-@mixin box-dimensions() {
-  height: 85%;
-  width: 100%;
-}
+@import 'variables';
+@import 'mixins';
 
 html {
   height: $full-height;
