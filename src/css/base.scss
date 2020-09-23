@@ -3,6 +3,8 @@
 @import 'normalize';
 
 $primary-background: #40B0A6;
+$feature-background: #F5F5DC;
+$full-height: 100%;
 
 @mixin flex-center() {
   display: flex;
@@ -10,21 +12,37 @@ $primary-background: #40B0A6;
   justify-content: center;
 }
 
+@mixin section-text() {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem; 
+}
+
+@mixin hover-buttons() {
+  cursor: pointer;
+  background-color: #D9EAEA;
+}
+
+@mixin box-dimensions() {
+  height: 85%;
+  width: 100%;
+}
+
 html {
-  height: 100%;
+  height: $full-height;
 }
 
 body {
   background: $primary-background;
-  height: 100%;
+  height: $full-height;
 }
 
 main {
-  height: 100%;
+  height: $full-height;
 }
 
 .header {
-  background-color: #F5F5DC;
+  background-color: $feature-background;
   display: flex;
   justify-content: space-between;
   border-bottom: solid;
@@ -44,10 +62,6 @@ main {
   margin-right: 1rem;
 }
 
-.password-section {
-  @include flex-center();
-}
-
 .password-indicator {
   margin-right: 1rem;
 }
@@ -61,7 +75,7 @@ main {
 }
 
 .dashboard-display {
-  height: 100%;
+  height: $full-height;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr 5fr;
@@ -69,19 +83,8 @@ main {
   grid-gap: 5%;
 }
 
-.logout-button:hover {
-  cursor: pointer;
-  background-color: #D9EAEA;
-}
-
-.show-cost-button:hover {
-  cursor: pointer;
-  background-color: #D9EAEA;
-}
-
-.book-trip-button:hover {
-  cursor: pointer;
-  background-color: #D9EAEA;
+.logout-button:hover, .show-cost-button:hover, .book-trip-button:hover {
+  @include hover-buttons();
 }
 
 .plan-and-history {
@@ -102,45 +105,31 @@ main {
 .plan-box {
  grid-row-start: 2;
  grid-column-start: 1;
- background-color:#F5F5DC;
- height: 85%;
- width: 100%;
+ background-color: $feature-background;
+ @include box-dimensions();
 }
 
 .history-box {
  grid-row-start: 2;
  grid-column-start: 2;
- background-color: #F5F5DC;
- height: 85%;
- width: 100%;
+ background-color: $feature-background;
+ @include box-dimensions();
  display: grid;
  grid-template-columns: repeat(2, 1fr);
  grid-template-rows: 2fr 2fr 0.5fr;
  text-align: center;
 }
 
-.date-article {
-  @include flex-center();
-}
-
 .date-indicator {
   margin-right: 1rem;
 }
 
-.duration-article {
-  @include flex-center();
-}
-
-.travelers-article {
+.duration-article, .travelers-article, .cost-article, .date-article, .password-section {
   @include flex-center();
 }
 
 .destination-article {
   text-align: center;
-}
-
-.cost-article {
-  @include flex-center();
 }
 
 .book-trip-button {
@@ -160,8 +149,7 @@ main {
   margin-top: 2rem;
 
   &:hover {
-    cursor: pointer;
-    background-color: #D9EAEA;
+    @include hover-buttons();
   }
 }
 
@@ -216,20 +204,12 @@ main {
   }
 
   .dashboard-display {
-    height: 100%;
+    height: $full-height;
     display: block;
   }
 
-  .plan-my-trip-text {
-    text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-
-  .trip-history {
-    text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+  .plan-my-trip-text, .trip-history {
+    @include section-text();
   }
 
   .history-box {
